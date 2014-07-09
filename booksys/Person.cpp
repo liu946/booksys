@@ -23,7 +23,7 @@ void Person::getage(int c)
 }
 void Person::getbook(string d)
 {
-    book += d;
+    book = d;
 }
 void Person::getxx(bool x)
 {
