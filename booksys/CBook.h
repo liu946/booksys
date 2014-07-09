@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include <stdlib.h>
 #include <string>
+#include <iostream>
 using namespace std;
 struct Date
 {
