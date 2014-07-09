@@ -22,14 +22,14 @@ public:
         xx = 1;
 		book="null";
     }
-    virtual void showMenu()
+   /* virtual void showMenu()
     {
 
     }
     virtual int checkUser()
     {
         return 0;
-    }
+    }*/
     void getID(string ID1);
     void getpassword(string s);
 	void getname(string a);

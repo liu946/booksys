@@ -1,6 +1,5 @@
-//#include "StdAfx.h"
+#include "StdAfx.h"
 #include "Studentmanagement.h"
-#include "Person.h"
 #include <string>
 /*bool Studentmanagement::comp(string a,string b)
 {
@@ -62,7 +61,6 @@ bool Studentmanagement::check1(string ID2)
     filestudent.open("student.dat",ios::in);
     {
         string ID1,password1,name1,sex1,book1;
-        long long id1;
         int age1;
         bool xx1;
         while(!filestudent.eof())
@@ -90,7 +88,7 @@ void Studentmanagement::add1(string ID1,string password1,string name1)
     fileStudent.close();
 }
 //显示函数
-Student Studentmanagement::show(bool &x)
+Student* Studentmanagement::show(bool &x)
 {
     if(file.eof())
     {
@@ -110,8 +108,9 @@ Student Studentmanagement::show(bool &x)
         a.getage(age1);
         a.getbook(book1);
         a.getxx(xx1);
-        return a;
+        return &a;
     }
+	return NULL;
 }
 //查找函数
 void Studentmanagement::finds(string name2)

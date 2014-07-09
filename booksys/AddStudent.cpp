@@ -57,6 +57,6 @@ void AddStudent::OnEnKillfocusAddsid()
 	GetDlgItemText(IDC_ADDSID,LPTSTR(clistid),29);
 	if (!Studentmanagement::check1(clistid)){
 		SetDlgItemText(IDC_ADDMESSAGE,LPCTSTR("id ÒÑ´æÔÚ"));
-		addconfirmbtn.EnableWindow(
+		addconfirmbtn.EnableWindow(false);
 	}
 }

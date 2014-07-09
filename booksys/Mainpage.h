@@ -30,4 +30,5 @@ public:
 	virtual BOOL OnInitDialog();
 	CListBox showlist;
 	afx_msg void On32771();
+	afx_msg void On32772();
 };
