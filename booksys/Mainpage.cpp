@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include "booksysDlg.h"
 #include "AddStudent.h"
+#include "Studentmanagement.h"
 
 
 // Mainpage 对话框
@@ -37,6 +38,7 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &Mainpage::OnBnClickedButton2)
 	ON_COMMAND(ID_32780, &Mainpage::On32780)
 	ON_COMMAND(ID_32771, &Mainpage::On32771)
+	ON_COMMAND(ID_32772, &Mainpage::On32772)
 END_MESSAGE_MAP()
 
 
@@ -71,9 +73,7 @@ BOOL Mainpage::OnInitDialog()
 	m_menu.LoadMenu(IDR_MENUADMIN);
 	SetMenu(&m_menu);
 	//加载
-	for(int i=0;i<30;i++){
-		this->showlist.AddString(LPCTSTR("123"));
-	}
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
 }
@@ -84,4 +84,23 @@ void Mainpage::On32771()
 	// TODO: 在此添加命令处理程序代码
 	AddStudent adds;
 	adds.DoModal();
+}
+
+
+void Mainpage::On32772()
+{
+	// TODO: 在此添加命令处理程序代码
+	/*bool endflag=true;
+	Studentmanagement::file.open("student.dat",ios::in );
+	while(endflag){
+		Student * tempstu;
+		tempstu = Studentmanagement::show(endflag);
+		if(!(tempstu == NULL)){
+			char age [3];
+			itoa(tempstu->sentage(),age,3);
+			string data = tempstu->sentID() +"\t" + tempstu->sentname()+"\t"+tempstu->sentsex()+"\t" + age +"\t"+tempstu->sentbook();
+			this->showlist.AddString(LPCTSTR(data.c_str()));
+		}
+	}*/
+
 }
