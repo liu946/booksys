@@ -19,3 +19,16 @@
 *.exe
 *.out
 *.app
+*.sdf
+*.sln
+*.suo
+ipch/
+Debug/
+*.asm
+*.aps
+booksys/Debug/
+booksys/res/
+*.vcxproj
+*.fliters
+*.user
+
