@@ -16,7 +16,7 @@ void CBookMangement::AddBookInformation(string a, long b, int c, int d, int x, i
 	bookinformation << z << endl;
 	bookinformation.close();
 }
-CBook CBookMangement::BookDateSearch(int year, int month, int day)
+CBook CBookMangement::BookDateSearch(bool &end,int year, int month, int day)
 {
 	fstream bookinformation;
 	bookinformation.open("BookInformation.txt", ios::in);
@@ -32,10 +32,11 @@ CBook CBookMangement::BookDateSearch(int year, int month, int day)
 			return book;
 		}
 	}
-	cout << "没有找到！" << endl;
-	exit(0);
+	end = false;
+	CBook booknull("abc", 11111, 1, 1, 1, 1, 1);
+	return booknull;
 }
-CBook CBookMangement::BookNameSearch(string name)
+CBook CBookMangement::BookNameSearch(bool &end,string name)
 {
 	fstream bookinformation;
 	bookinformation.open("BookInformation.txt", ios::in);
@@ -51,10 +52,11 @@ CBook CBookMangement::BookNameSearch(string name)
 			return book;
 		}
 	}
-	cout << "没有找到！" << endl;
-	exit(0);
+	end = false;
+	CBook booknull("abc", 11111, 1, 1, 1, 1, 1);
+	return booknull;
 }
-CBook CBookMangement::BookIDSearch(long ID)
+CBook CBookMangement::BookIDSearch(bool &end,long ID)
 {
 	fstream bookinformation;
 	bookinformation.open("BookInformation.txt", ios::in);
@@ -70,6 +72,115 @@ CBook CBookMangement::BookIDSearch(long ID)
 			return book;
 		}
 	}
-	cout << "没有找到！" << endl;
-	exit(0);
+	end = false;
+	CBook booknull("abc", 11111, 1, 1, 1, 1, 1);
+	return booknull;
+}
+void BookReturn(bool &end,long ID)
+{
+	int p = 0;
+	fstream book,book1;
+	book.open("BookInformation.txt", ios::in);
+	book1.open("booknew.txt", ios::out);
+	while (!book.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book >> a >> b >> c >> d >> x >> y >> z;
+		book1 << a << " " << b << " " << c << " " << d << " " << x << " " << y << " " << z << endl;
+		if (b == ID)
+		{
+			d++;
+			p++;
+		}
+	}
+	book.close();
+	book1.close();
+	fstream book2, book3;
+	book2.open("BookInformation.txt", ios::out);
+	book3.open("booknew.txt", ios::in);
+	while (!book3.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book3 >> a >> b >> c >> d >> x >> y >> z;
+		book2 << a << " " << b << " " << c << " " << d << " " << x << " " << y << " " << z << endl;
+	}
+	book2.close();
+	book3.close();
+	if (p == 0){ end = false; }
+}
+
+void BookDelete(bool &end, long ID)
+{
+	int p = 0;
+	fstream book, book1;
+	book.open("BookInformation.txt", ios::in);
+	book1.open("booknew.txt", ios::out);
+	while (!book.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book >> a >> b >> c >> d >> x >> y >> z;
+		if (b != ID)
+		{
+			book1 << a << " " << b << " " << c << " " << d << " " << x << " " << y << " " << z << endl;
+		}
+		else { p++; }
+	}
+	book.close();
+	book1.close();
+	fstream book2, book3;
+	book2.open("BookInformation.txt", ios::out);
+	book3.open("booknew.txt", ios::in);
+	while (!book3.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book3 >> a >> b >> c >> d >> x >> y >> z;
+		book2 << a << " " << b << " " << c << " " << d << " " << x << " " << y << " " << z << endl;
+	}
+	book2.close();
+	book3.close();
+	if (p == 0){ end = false; }
+}
+void BookSent(bool &end, long ID)
+{
+	int p = 0;
+	fstream book, book1;
+	book.open("BookInformation.txt", ios::in);
+	book1.open("booknew.txt", ios::out);
+	while (!book.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book >> a >> b >> c >> d >> x >> y >> z;
+		book1 << a << " " << b << " " << c << " " << d << " " << x << " " << y << " " << z << endl;
+		if (b == ID)
+		{
+			d++;
+			p++;
+		}
+	}
+	book.close();
+	book1.close();
+	fstream book2, book3;
+	book2.open("BookInformation.txt", ios::out);
+	book3.open("booknew.txt", ios::in);
+	while (!book3.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book3 >> a >> b >> c >> d >> x >> y >> z;
+		book2 << a << " " << b << " " << c << " " << d << " " << x << " " << y << " " << z << endl;
+	}
+	book2.close();
+	book3.close();
+	if (p == 0){ end = false; }
 }
