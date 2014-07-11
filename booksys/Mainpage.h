@@ -1,6 +1,8 @@
 #pragma once
 #include "afxwin.h"
 #include <string>
+#include "Studentmanagement.h"
+#include "afxcmn.h"
 using namespace std;
 // Mainpage 对话框
 
@@ -11,6 +13,7 @@ class Mainpage : public CDialogEx
 public:
 	Mainpage(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~Mainpage();
+	Studentmanagement Stumgt;
 	//加载菜单
 	CMenu m_menu;
 	//用户数据
@@ -28,7 +31,10 @@ public:
 	afx_msg void OnBnClickedButton2();
 	afx_msg void On32780();
 	virtual BOOL OnInitDialog();
-	CListBox showlist;
+	//CListBox showlist;
 	afx_msg void On32771();
 	afx_msg void On32772();
+	afx_msg void On32775();
+	afx_msg void On32781();
+	CListCtrl showlist;
 };

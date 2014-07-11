@@ -1,6 +1,6 @@
 #pragma once
 #include "afxwin.h"
-
+#include "Studentmanagement.h"
 
 // AddStudent 对话框
 
@@ -11,6 +11,7 @@ class AddStudent : public CDialogEx
 public:
 	AddStudent(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~AddStudent();
+	Studentmanagement stumgt;
 
 // 对话框数据
 	enum { IDD = IDD_ADDSTUDENT };

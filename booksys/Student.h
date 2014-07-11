@@ -4,6 +4,6 @@
 class Student:public Person
 {
 public:
-    void showMenu(){}
-    int checkUser(){return 0;}
+   // void showMenu(){}
+    //int checkUser(){return 0;}
 };

@@ -46,7 +46,7 @@ void AddStudent::OnBnClickedOk()
 	GetDlgItemText(IDC_ADDSID,LPTSTR(clistid),29);
 	GetDlgItemText(IDC_ADDSNAME,LPTSTR(clistname),29);
 	GetDlgItemText(IDC_ADDSPWD,LPTSTR(clistpwd),29);
-	Studentmanagement::add1(clistid,clistpwd,clistname);
+	stumgt.add1(clistid,clistpwd,clistname);
 }
 
 
@@ -55,8 +55,12 @@ void AddStudent::OnEnKillfocusAddsid()
 	// TODO: 在此添加控件通知处理程序代码
 	char clistid[30];
 	GetDlgItemText(IDC_ADDSID,LPTSTR(clistid),29);
-	if (!Studentmanagement::check1(clistid)){
+
+	if (!this->stumgt.check1(clistid)){
 		SetDlgItemText(IDC_ADDMESSAGE,LPCTSTR("id 已存在"));
 		addconfirmbtn.EnableWindow(false);
+	}else{
+		SetDlgItemText(IDC_ADDMESSAGE,LPCTSTR("此 id 可以使用"));
+		addconfirmbtn.EnableWindow(true);	
 	}
 }

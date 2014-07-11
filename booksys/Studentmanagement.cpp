@@ -23,11 +23,11 @@ void Studentmanagement::mysort(int flag)
     Student c[10000];
     int i=0;
     fstream fileStudent;
-    fileStudent.open("Student,dat",ios::in)
+    fileStudent.open("Student,dat",ios::in);
     while(!fileStudent.eof())
     {
         string ID1,password1,name1,sex1,book1;
-        int age1;
+        string age1;
         cin>>ID1>>password1>>name1>>sex1>>age1>>book1;
         c[i].getID(ID1);
         c[i].getpassword(password1);
@@ -40,7 +40,7 @@ void Studentmanagement::mysort(int flag)
     fileStudent.close();
     if(flag==1)
     {
-        sort(c,c+i,sortname());
+        //sort(c,c+i,sortname);
         fileStudent.open("student.dat",ios::out);
         for(int j=0;j<=i;j++)
         {
@@ -50,7 +50,7 @@ void Studentmanagement::mysort(int flag)
     }
     else
     {
-        sort(c,c+i,sortage());
+//        sort(c,c+i,sortage);
         fileStudent.open("student.dat",ios::out);
         for(int j=0;j<=i;j++)
         {
@@ -116,7 +116,7 @@ void Studentmanagement::add1(string ID1,string password1,string name1)
     fileStudent.close();
 }
 //显示函数
-Student* Studentmanagement::show(bool &x)
+Student Studentmanagement::show(bool &x)
 {
     if(file.eof())
     {
@@ -125,7 +125,7 @@ Student* Studentmanagement::show(bool &x)
     else
     {
         string ID1,password1,name1,sex1,book1;
-        int age1;
+        string age1;
         file>>ID1>>password1>>name1>>sex1>>age1>>book1;
         Student a;
         a.getID(ID1);
@@ -134,9 +134,10 @@ Student* Studentmanagement::show(bool &x)
         a.getsex(sex1);
         a.getage(age1);
         a.getbook(book1);
-        return &a;
+        return a;
     }
-	return NULL;
+	Student b;
+	return b;
 }
 //查找函数
 void Studentmanagement::finds(string name2)
@@ -144,7 +145,7 @@ void Studentmanagement::finds(string name2)
     file.open("student.dat",ios::in);
     findname=name2;
 }
-Student* Studentmanagement::nextname(bool &y)
+Student Studentmanagement::nextname(bool &y)
 {
     if(file.eof())
     {
@@ -153,7 +154,7 @@ Student* Studentmanagement::nextname(bool &y)
     else
     {
         string ID1,password1,name1,sex1,book1;
-        int age1;
+        string age1;
         file>>ID1>>password1>>name1>>sex1>>age1>>book1;
         if(findname==name1)
         {
@@ -165,20 +166,21 @@ Student* Studentmanagement::nextname(bool &y)
             a.getsex(sex1);
             a.getage(age1);
             a.getbook(book1);
-            return &a;
+            return a;
         }
         else return nextname(y);
     }
-    return NULL;
+	Student b;
+    return b;
 }
-Student* Studentmanagement::nextid(bool &z)
+Student Studentmanagement::nextid(bool &z)
 {
     fstream filestudent;
     filestudent.open("student.dat",ios::in);
     while(!filestudent.eof())
     {
         string ID1,password1,name1,sex1,book1;
-        int age1;
+        string age1;
         filestudent>>ID1>>password1>>name1>>sex1>>age1>>book1;
         if(findname==ID1)
         {
@@ -190,11 +192,12 @@ Student* Studentmanagement::nextid(bool &z)
             a.getsex(sex1);
             a.getage(age1);
             a.getbook(book1);
-            return &a;
+            return a;
         }
     }
     z=false;
-    return NULL;
+	Student b;
+    return b;
 }
 //修改函数
 void Studentmanagement::modify(string ID2,string password2,string name2,string sex2,int age2,string book2)

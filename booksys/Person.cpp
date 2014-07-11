@@ -17,17 +17,13 @@ void Person::getsex(string b)
 {
     sex = b;
 }
-void Person::getage(int c)
+void Person::getage(string c)
 {
     age = c;
 }
 void Person::getbook(string d)
 {
-    book += d;
-}
-void Person::getxx(bool x)
-{
-    xx = x;
+    book = d;
 }
 string Person::sentID()
 {
@@ -45,15 +41,11 @@ string Person::sentsex()
 {
     return sex;
 }
-int Person::sentage()
+string Person::sentage()
 {
     return age;
 }
 string Person::sentbook()
 {
     return book;
-}
-bool Person::sentxx()
-{
-    return xx;
 }

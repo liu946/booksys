@@ -11,13 +11,14 @@ private:
     string password;
 	string name;
 	string sex;
-	int age;
+	string age;
 	string book;
 public:
     Person()
     {
+		name="";
         sex = "man";
-        age = 18;
+        age = "18";
 		book="null";
     }
     virtual void showMenu()
@@ -32,12 +33,12 @@ public:
     void getpassword(string s);
 	void getname(string a);
 	void getsex(string b);
-	void getage(int c);
+	void getage(string c);
 	void getbook(string d);
 	string sentID();
 	string sentpassword();
 	string sentname();
 	string sentsex();
-	int sentage();
+	string sentage();
 	string sentbook();
 };
