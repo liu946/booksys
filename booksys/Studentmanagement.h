@@ -20,7 +20,7 @@ public:
      bool comp(int a,int b);
      bool sortage(Student a,Student b);
      bool sortname(Student a,Student b);
-     void mysort(int flag=1);
+     void mysort(bool flag=true);
 	 void backup();
 	 void rollback(string ID2);
 };

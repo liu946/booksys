@@ -18,7 +18,7 @@ bool Studentmanagement::sortname(Student a,Student b)
 	return comp(a.sentname(),b.sentname());
 }
 //ÅÅÐòº¯Êý
-void Studentmanagement::mysort(int flag)
+void Studentmanagement::mysort(bool flag)
 {
     Student c[10000];
     int i=0;
@@ -38,7 +38,7 @@ void Studentmanagement::mysort(int flag)
         i++;
     }
     fileStudent.close();
-    if(flag==1)
+    if(flag==true)
     {
         //sort(c,c+i,sortname);
         fileStudent.open("student.dat",ios::out);
@@ -50,7 +50,7 @@ void Studentmanagement::mysort(int flag)
     }
     else
     {
-//        sort(c,c+i,sortage);
+       // sort(c,c+i,sortage);
         fileStudent.open("student.dat",ios::out);
         for(int j=0;j<=i;j++)
         {
@@ -87,7 +87,9 @@ void Studentmanagement::mysort(int flag)
 bool Studentmanagement::check1(string ID2)
 {
     fstream filestudent;
+	
     filestudent.open("student.dat",ios::in);
+	if(!filestudent)return true;
     {
         string ID1,password1,name1,sex1,book1;
         int age1;
@@ -148,6 +150,7 @@ void Studentmanagement::finds(string name2)
 }
 Student Studentmanagement::nextname(bool &y)
 {
+	if(!file){file.close();	Student b;return b;}
     if(file.eof())
     {
         y=false;
@@ -177,14 +180,17 @@ Student Studentmanagement::nextname(bool &y)
 }
 Student Studentmanagement::nextid(bool &z)
 {
-    fstream filestudent;
-    filestudent.open("student.dat",ios::in);
-    while(!filestudent.eof())
+	if(!file){file.close();	Student b;return b;}
+    if(file.eof())
+    {
+        z=false;
+    }
+    else
     {
         string ID1,password1,name1,sex1,book1;
         string age1;
-        filestudent>>ID1>>password1>>name1>>sex1>>age1>>book1;
-        if(findname==ID1)
+        file>>ID1>>password1>>name1>>sex1>>age1>>book1;
+        if(ID1==findname)
         {
             z=true;
             Student a;
@@ -196,8 +202,9 @@ Student Studentmanagement::nextid(bool &z)
             a.getbook(book1);
             return a;
         }
+        else return nextid(z);
     }
-    z=false;
+	file.close();
 	Student b;
     return b;
 }
@@ -237,10 +244,10 @@ void Studentmanagement::delet(string ID2)
     while(!filestudent1.eof())
     {
         string ID1,password1,name1,sex1,book1;
-        int age1;
+        string age1;
         filestudent1>>ID1>>password1>>name1>>sex1>>age1>>book1;
         if(ID1!=ID2)
-        filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<' '<<endl;
+        filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
     }
     filestudent1.close();
     filestudent2.close();
@@ -248,7 +255,11 @@ void Studentmanagement::delet(string ID2)
     filestudent2.open("student1.dat",ios::in);
     while(!filestudent2.eof())
     {
-        filestudent1<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<endl;
+		string ID1,password1,name1,sex1,book1;
+        string age1;
+        filestudent2>>ID1>>password1>>name1>>sex1>>age1>>book1;
+        filestudent1<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
+        //filestudent1<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<endl;
     }
     filestudent1.close();
     filestudent2.close();

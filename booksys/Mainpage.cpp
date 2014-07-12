@@ -17,6 +17,8 @@ IMPLEMENT_DYNAMIC(Mainpage, CDialogEx)
 
 Mainpage::Mainpage(CWnd* pParent /*=NULL*/)
 	: CDialogEx(Mainpage::IDD, pParent)
+	, byname(0)
+	, byid(0)
 {
 	//m_menu.LoadMenu(IDR_MENU1);
 	//SetMenu(&m_menu);
@@ -47,13 +49,14 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_COMMAND(ID_32775, &Mainpage::On32775)
 	ON_COMMAND(ID_32781, &Mainpage::On32781)
 	ON_BN_CLICKED(IDC_DEL, &Mainpage::OnBnClickedDel)
+	ON_BN_CLICKED(IDC_MOD, &Mainpage::OnBnClickedMod)
 END_MESSAGE_MAP()
 
 
 // Mainpage 消息处理程序
 
 
-
+//finds
 void Mainpage::OnBnClickedButton2()
 {
 	// TODO: 在此添加控件通知处理程序代码
@@ -75,7 +78,11 @@ void Mainpage::OnBnClickedButton2()
 	int i=0;
 	while(flag){
 		Student tempstu;
-		tempstu=this->Stumgt.nextname(flag);
+		if(((CButton *)GetDlgItem(IDC_BYNAME))->GetCheck()){
+			tempstu=this->Stumgt.nextname(flag);
+		}else{
+			tempstu=this->Stumgt.nextid(flag);
+		}
 		if(tempstu.sentname()=="")break;
 		this->showlist.InsertItem(i,LPCTSTR(tempstu.sentID().c_str()));       //插入行
 		this->showlist.SetItemText(i,1,LPCTSTR(tempstu.sentname().c_str()));    //设置该行的不同列的显示字符
@@ -139,6 +146,7 @@ void Mainpage::On32772()
 	clearlist();
 	bool endflag=true;
 	Stumgt.file.open("student.dat",ios::in );
+	if(!this->Stumgt.file){this->Stumgt.file.close();return;}
 		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
 		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
 		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
@@ -197,6 +205,41 @@ void Mainpage::OnBnClickedDel()
 			this->showlist.DeleteItem(nItem);
 			// you could do your own processing on nItem here
 		}
+	}
+}
 
+
+
+
+
+void Mainpage::OnBnClickedMod()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	POSITION pos = showlist.GetFirstSelectedItemPosition();
+	if (pos == NULL) {
+		AfxMessageBox(_T("No items were selected!\n"));
+	}
+	else {
+		while(pos) {
+			int nItem = showlist.GetNextSelectedItem(pos);
+			char id[20];
+			char pwd[20];
+			char name[30];
+			char sex[5];
+			char age[4];
+			showlist.GetItemText(nItem,0,id,19);
+			showlist.GetItemText(nItem,1,pwd,19);
+			showlist.GetItemText(nItem,2,name,29);
+			showlist.GetItemText(nItem,3,sex,4);
+			showlist.GetItemText(nItem,4,age,3);
+			Mod modfrm;
+			modfrm.id=id;
+			modfrm.pwd=pwd;
+			modfrm.name=name;
+			modfrm.sex=sex;
+			modfrm.age=age;
+			modfrm.DoModal();
+			// you could do your own processing on nItem here
+		}
 	}
 }

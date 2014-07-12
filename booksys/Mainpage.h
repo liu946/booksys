@@ -38,4 +38,8 @@ public:
 	afx_msg void On32781();
 	CListCtrl showlist;
 	afx_msg void OnBnClickedDel();
+	int byname;
+	int byid;
+	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedMod();
 };
