@@ -136,6 +136,7 @@ Student Studentmanagement::show(bool &x)
         a.getbook(book1);
         return a;
     }
+	file.close();
 	Student b;
 	return b;
 }
@@ -170,6 +171,7 @@ Student Studentmanagement::nextname(bool &y)
         }
         else return nextname(y);
     }
+	file.close();
 	Student b;
     return b;
 }

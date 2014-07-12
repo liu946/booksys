@@ -34,6 +34,10 @@ void Mainpage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, showlist);
 }
 
+void Mainpage::clearlist(){
+		showlist.DeleteAllItems();
+		while(showlist.DeleteColumn(0));
+}
 
 BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON2, &Mainpage::OnBnClickedButton2)
@@ -42,6 +46,7 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_COMMAND(ID_32772, &Mainpage::On32772)
 	ON_COMMAND(ID_32775, &Mainpage::On32775)
 	ON_COMMAND(ID_32781, &Mainpage::On32781)
+	ON_BN_CLICKED(IDC_DEL, &Mainpage::OnBnClickedDel)
 END_MESSAGE_MAP()
 
 
@@ -52,7 +57,12 @@ END_MESSAGE_MAP()
 void Mainpage::OnBnClickedButton2()
 {
 	// TODO: 在此添加控件通知处理程序代码
-		
+	    //this->showlist.DeleteAllItems();
+		//this->showlist.DeleteColumn(0);
+		//this->showlist.DeleteColumn(1);
+		//this->showlist.DeleteColumn(2);
+
+		clearlist();
 		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
 		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
 		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
@@ -62,15 +72,17 @@ void Mainpage::OnBnClickedButton2()
 	this->search.GetWindowTextA(strBuf,20);
 	this->Stumgt.finds(strBuf);
 	bool flag=true;
+	int i=0;
 	while(flag){
 		Student tempstu;
 		tempstu=this->Stumgt.nextname(flag);
 		if(tempstu.sentname()=="")break;
-		this->showlist.InsertItem(0,LPCTSTR(tempstu.sentID().c_str()));       //插入行
-		this->showlist.SetItemText(0,1,LPCTSTR(tempstu.sentname().c_str()));    //设置该行的不同列的显示字符
-		this->showlist.SetItemText(0,2,LPCTSTR(tempstu.sentsex().c_str()));    
-		this->showlist.SetItemText(0,3,LPCTSTR(tempstu.sentage().c_str()));    
-		this->showlist.SetItemText(0,4,LPCTSTR(tempstu.sentbook().c_str()));  
+		this->showlist.InsertItem(i,LPCTSTR(tempstu.sentID().c_str()));       //插入行
+		this->showlist.SetItemText(i,1,LPCTSTR(tempstu.sentname().c_str()));    //设置该行的不同列的显示字符
+		this->showlist.SetItemText(i,2,LPCTSTR(tempstu.sentsex().c_str()));    
+		this->showlist.SetItemText(i,3,LPCTSTR(tempstu.sentage().c_str()));    
+		this->showlist.SetItemText(i,4,LPCTSTR(tempstu.sentbook().c_str()));  
+		i++;
 	}
 }
 
@@ -94,6 +106,18 @@ BOOL Mainpage::OnInitDialog()
 	//加载菜单
 	m_menu.LoadMenu(IDR_MENUADMIN);
 	SetMenu(&m_menu);
+
+	//处理list
+	showlist.ModifyStyle(0L,LVS_SHOWSELALWAYS);
+	DWORD dwStyle = showlist.GetExtendedStyle();
+	dwStyle |= LVS_EX_FULLROWSELECT;//选中某行使整行高亮（只适用与report风格的listctrl）
+	//dwStyle |= LVS_EX_GRIDLINES;//网格线（只适用与report风格的listctrl）
+//	dwStyle |= LVS_EX_CHECKBOXES;//item前生成checkbox控件
+	showlist.SetExtendedStyle(dwStyle);
+	//设置列标题
+	//InsertColumn第三个参数可设置为LVCFMT_LEFT, LVCFMT_RIGHT, or LVCFMT_CENTER
+	//解决第一列始终靠左的问题
+	//showlist.DeleteColumn(0);
 	//加载
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -112,6 +136,7 @@ void Mainpage::On32771()
 void Mainpage::On32772()
 {
 	// TODO: 在此添加命令处理程序代码
+	clearlist();
 	bool endflag=true;
 	Stumgt.file.open("student.dat",ios::in );
 		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
@@ -153,4 +178,25 @@ void Mainpage::On32781()
 	// TODO: 在此添加命令处理程序代码
 	Mod modpage;
 	modpage.DoModal();
+}
+
+
+void Mainpage::OnBnClickedDel()
+{
+	// TODO: Add your control notification handler code here
+	POSITION pos = showlist.GetFirstSelectedItemPosition();
+	if (pos == NULL) {
+		AfxMessageBox(_T("No items were selected!\n"));
+	}
+	else {
+		while(pos) {
+			int nItem = showlist.GetNextSelectedItem(pos);
+			char buf[20];
+			showlist.GetItemText(nItem,0,buf,19);
+			this->Stumgt.delet(buf);
+			this->showlist.DeleteItem(nItem);
+			// you could do your own processing on nItem here
+		}
+
+	}
 }

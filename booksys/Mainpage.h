@@ -23,7 +23,7 @@ public:
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
-
+	void clearlist();
 	DECLARE_MESSAGE_MAP()
 public:
 	CEdit search;
@@ -37,4 +37,5 @@ public:
 	afx_msg void On32775();
 	afx_msg void On32781();
 	CListCtrl showlist;
+	afx_msg void OnBnClickedDel();
 };
