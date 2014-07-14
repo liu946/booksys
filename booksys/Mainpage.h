@@ -42,4 +42,10 @@ public:
 	int byid;
 	afx_msg void OnBnClickedButton3();
 	afx_msg void OnBnClickedMod();
+	afx_msg void On32773();
+	afx_msg void On32789();
+	afx_msg void On32779();
+	afx_msg void On32790();
+	afx_msg void On32791();
+	afx_msg void On_newbook();
 };

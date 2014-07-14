@@ -43,10 +43,18 @@ void AddStudent::OnBnClickedOk()
 	char clistid[30];
 	char clistname[30];
 	char clistpwd[30];
-	GetDlgItemText(IDC_ADDSID,LPTSTR(clistid),29);
-	GetDlgItemText(IDC_ADDSNAME,LPTSTR(clistname),29);
-	GetDlgItemText(IDC_ADDSPWD,LPTSTR(clistpwd),29);
-	stumgt.add1(clistid,clistpwd,clistname);
+	string id(clistid);
+	if(this->stumgt.check1(id)){
+		GetDlgItemText(IDC_ADDSID,LPTSTR(clistid),29);
+		GetDlgItemText(IDC_ADDSNAME,LPTSTR(clistname),29);
+		GetDlgItemText(IDC_ADDSPWD,LPTSTR(clistpwd),29);
+		stumgt.add1(clistid,clistpwd,clistname);
+		string succmsg(clistname);
+		succmsg="添加学生"+succmsg+"成功！";
+		SetDlgItemText(IDC_ADDMESSAGE,LPCTSTR(succmsg.c_str()));
+	}else{
+		SetDlgItemText(IDC_ADDMESSAGE,LPCTSTR("id 已存在！"));
+	}
 }
 
 
@@ -64,3 +72,5 @@ void AddStudent::OnEnKillfocusAddsid()
 		addconfirmbtn.EnableWindow(true);	
 	}
 }
+
+

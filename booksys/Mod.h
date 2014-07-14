@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "afxwin.h"
+#include "Studentmanagement.h"
 using namespace std;
 
 // Mod 对话框
@@ -20,7 +21,7 @@ public:
 	string pwd;
 	string sex;
 	string age;
-
+	Studentmanagement stumgt;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持

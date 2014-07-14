@@ -5,7 +5,7 @@
 #include "booksys.h"
 #include "Mod.h"
 #include "afxdialogex.h"
-
+#include "Mainpage.h"
 
 // Mod 对话框
 
@@ -43,7 +43,19 @@ void Mod::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//更改个人信息
-
+	char id[30];
+	char name[30];
+	char age[30];
+	char pwd[30];
+	char sex[30];
+	tx_id.GetWindowTextA(id,29);
+	tx_name.GetWindowTextA(name,29);
+	tx_age.GetWindowTextA(age,29);
+	tx_pwd.GetWindowTextA(pwd,29);
+	tx_sex.GetWindowTextA(sex,29);
+	this->stumgt.modify(id,pwd,name,sex,age);
+	((Mainpage*)this->GetParent())->On32772();
+	//发送一个消息，更新列表
 	CDialogEx::OnOK();
 }
 

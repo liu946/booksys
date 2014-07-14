@@ -9,8 +9,8 @@ class CBookMangement
 {
 	/*public:
 	CBook book;*/
-private:
-	void AddBookInformation(string a, long b, int c, int d, int x, int y, int z);
+public:
+	void AddBookInformation(string name, long id, int total, int curnum, int year, int month, int day);
 	CBook BookDateSearch(bool &end,int year, int month, int day);
 	CBook BookNameSearch(bool &end,string name);
 	CBook BookIDSearch(bool &end,long a);

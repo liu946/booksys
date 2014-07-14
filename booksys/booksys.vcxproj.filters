@@ -66,6 +66,18 @@
     <ClInclude Include="Mod.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Rollback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CBook.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CBookMangement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Newbook.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="booksys.cpp">
@@ -102,6 +114,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Mod.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Rollback.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CBook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CBookMangement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Newbook.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

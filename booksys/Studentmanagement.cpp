@@ -1,11 +1,9 @@
 #include "StdAfx.h"
 #include "Studentmanagement.h"
+#include <algorithm>
 #include <string>
+using namespace std;
 bool Studentmanagement::comp(string a,string b)
-{
-	return a < b;
-}
-bool Studentmanagement::comp(int a,int b)
 {
 	return a < b;
 }
@@ -20,15 +18,17 @@ bool Studentmanagement::sortname(Student a,Student b)
 //排序函数
 void Studentmanagement::mysort(bool flag)
 {
-    Student c[10000];
+    Student c[1000];
     int i=0;
     fstream fileStudent;
-    fileStudent.open("Student,dat",ios::in);
+    fileStudent.open("Student.dat",ios::in);
     while(!fileStudent.eof())
     {
         string ID1,password1,name1,sex1,book1;
         string age1;
-        cin>>ID1>>password1>>name1>>sex1>>age1>>book1;
+        fileStudent>>ID1;
+		if(ID1=="")break;
+		fileStudent>>password1>>name1>>sex1>>age1>>book1;
         c[i].getID(ID1);
         c[i].getpassword(password1);
         c[i].getname(name1);
@@ -40,9 +40,9 @@ void Studentmanagement::mysort(bool flag)
     fileStudent.close();
     if(flag==true)
     {
-        //sort(c,c+i,sortname);
+        //std::sort(c,c+i,sortname);
         fileStudent.open("student.dat",ios::out);
-        for(int j=0;j<=i;j++)
+        for(int j=0;j<i;j++)
         {
             fileStudent<<c[j].sentID()<<' '<<c[j].sentpassword()<<' '<<c[j].sentname()<<' '<<c[j].sentsex()<<' '<<c[j].sentage()<<' '<<c[j].sentbook()<<endl;
         }
@@ -52,7 +52,7 @@ void Studentmanagement::mysort(bool flag)
     {
        // sort(c,c+i,sortage);
         fileStudent.open("student.dat",ios::out);
-        for(int j=0;j<=i;j++)
+        for(int j=0;j<i;j++)
         {
             fileStudent<<c[j].sentID()<<' '<<c[j].sentpassword()<<' '<<c[j].sentname()<<' '<<c[j].sentsex()<<' '<<c[j].sentage()<<' '<<c[j].sentbook()<<endl;
         }
@@ -209,7 +209,7 @@ Student Studentmanagement::nextid(bool &z)
     return b;
 }
 //修改函数
-void Studentmanagement::modify(string ID2,string password2,string name2,string sex2,int age2,string book2)
+void Studentmanagement::modify(string ID2,string password2,string name2,string sex2,string age2)
 {
     fstream filestudent1,filestudent2;
     filestudent1.open("student.dat",ios::in);
@@ -217,12 +217,12 @@ void Studentmanagement::modify(string ID2,string password2,string name2,string s
     while(!filestudent1.eof())
     {
         string ID1,password1,name1,sex1,book1;
-        int age1;
+        string age1;
         filestudent1>>ID1>>password1>>name1>>sex1>>age1>>book1;
         if(ID1==ID2)
-        filestudent2<<ID2<<' '<<password2<<' '<<name2<<' '<<sex2<<' '<<age2<<' '<<book2<<' '<<endl;
+        filestudent2<<ID2<<' '<<password2<<' '<<name2<<' '<<sex2<<' '<<age2<<' '<<book1<<endl;
         else
-        filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<' '<<endl;
+        filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
     }
     filestudent1.close();
     filestudent2.close();
@@ -230,7 +230,9 @@ void Studentmanagement::modify(string ID2,string password2,string name2,string s
     filestudent2.open("student1.dat",ios::in);
     while(!filestudent2.eof())
     {
-        filestudent1<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<endl;
+        string ID1,password1,name1,sex1,book1,age1;
+        filestudent2>>ID1>>password1>>name1>>sex1>>age1>>book1;
+        filestudent1<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
     }
     filestudent1.close();
     filestudent2.close();
@@ -265,34 +267,64 @@ void Studentmanagement::delet(string ID2)
     filestudent2.close();
 }
 //备份函数
-void Studentmanagement::backup()
+void Studentmanagement::backup(string filename)
 {
     fstream filestudent1,filestudent2;
     filestudent1.open("student.dat",ios::in);
-    filestudent2.open("student2.dat",ios::out);
+    filestudent2.open(filename,ios::out);
     while(!filestudent1.eof())
     {
-        filestudent1<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<' '<<filestudent2<<endl;
+       string ID1,password1,name1,sex1,age1,book1;
+       filestudent1>>ID1>>password1>>name1>>sex1>>age1>>book1;
+       filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
     }
     filestudent1.close();
     filestudent2.close();
 }
+
 //还原函数
-void Studentmanagement::rollback(string ID2)
+bool Studentmanagement::rollback(string ID2,string filename)
 {
     fstream filestudent1,filestudent2;
-    filestudent1.open("student2.dat",ios::in);
+    bool x1=false;
+    filestudent1.open(filename,ios::in);
     filestudent2.open("student.dat",ios::out&ios::app);
     while(!filestudent1.eof())
     {
-        string ID1,password1,name1,sex1,book1;
-        int age1;
+        string ID1,password1,name1,sex1,age1,book1;
         filestudent1>>ID1>>password1>>name1>>sex1>>age1>>book1;
         if(ID1==ID2)
-        filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<' '<<endl;
+        {
+            filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
+            x1=true;
+        }
     }
     filestudent1.close();
     filestudent2.close();
+    return x1;
 }
 
-
+Student Studentmanagement::IDfind(string ID2)
+{
+    fstream filestudent;
+    filestudent.open("student.dat",ios::in);
+    while(!filestudent.eof())
+    {
+        string ID1,password1,name1,sex1,book1;
+        string age1;
+        filestudent>>ID1>>password1>>name1>>sex1>>age1>>book1;
+        if(ID2==ID1)
+        {
+            Student a;
+            a.getID(ID1);
+            a.getpassword(password1);
+            a.getname(name1);
+            a.getsex(sex1);
+            a.getage(age1);
+            a.getbook(book1);
+            return a;
+        }
+    }
+	Student b;
+    return b;
+}

@@ -24,4 +24,5 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnEnKillfocusAddsid();
 	CButton addconfirmbtn;
+	afx_msg void On32789();
 };

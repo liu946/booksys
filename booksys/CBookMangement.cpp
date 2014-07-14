@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CBookMangement.h"
-#include "CBook.h"
 #include <string>
 using namespace std;
 void CBookMangement::AddBookInformation(string a, long b, int c, int d, int x, int y, int z)

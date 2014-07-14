@@ -14,13 +14,13 @@ public:
 	Student show(bool &x);
 	Student nextname(bool &y);
 	Student nextid(bool &z);
-     void modify(string ID2,string password2,string name2,string sex2,int age2,string book2);
+     void modify(string ID2,string password2,string name2,string sex2,string age2);
      void delet(string ID2);
      bool comp(string a,string b);
-     bool comp(int a,int b);
      bool sortage(Student a,Student b);
      bool sortname(Student a,Student b);
      void mysort(bool flag=true);
-	 void backup();
-	 void rollback(string ID2);
+	 void backup(string filename);
+	 bool rollback(string ID2,string filename);
+	 Student IDfind(string);
 };

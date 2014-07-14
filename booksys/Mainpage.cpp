@@ -9,7 +9,8 @@
 #include "AddStudent.h"
 #include "Studentmanagement.h"
 #include "Mod.h"
-
+#include "Rollback.h"
+#include "Newbook.h"
 
 // Mainpage 对话框
 
@@ -50,6 +51,12 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_COMMAND(ID_32781, &Mainpage::On32781)
 	ON_BN_CLICKED(IDC_DEL, &Mainpage::OnBnClickedDel)
 	ON_BN_CLICKED(IDC_MOD, &Mainpage::OnBnClickedMod)
+	ON_COMMAND(ID_32773, &Mainpage::On32773)
+	ON_COMMAND(ID_32789, &Mainpage::On32789)
+	ON_COMMAND(ID_32779, &Mainpage::On32779)
+	ON_COMMAND(ID_32790, &Mainpage::On32790)
+	ON_COMMAND(ID_32791, &Mainpage::On32791)
+	ON_COMMAND(ID_32785, &Mainpage::On_newbook)
 END_MESSAGE_MAP()
 
 
@@ -223,18 +230,16 @@ void Mainpage::OnBnClickedMod()
 		while(pos) {
 			int nItem = showlist.GetNextSelectedItem(pos);
 			char id[20];
-			char pwd[20];
 			char name[30];
 			char sex[5];
 			char age[4];
 			showlist.GetItemText(nItem,0,id,19);
-			showlist.GetItemText(nItem,1,pwd,19);
-			showlist.GetItemText(nItem,2,name,29);
-			showlist.GetItemText(nItem,3,sex,4);
-			showlist.GetItemText(nItem,4,age,3);
+			showlist.GetItemText(nItem,1,name,29);
+			showlist.GetItemText(nItem,2,sex,4);
+			showlist.GetItemText(nItem,3,age,3);
 			Mod modfrm;
 			modfrm.id=id;
-			modfrm.pwd=pwd;
+			modfrm.pwd=this->Stumgt.IDfind(id).sentpassword();
 			modfrm.name=name;
 			modfrm.sex=sex;
 			modfrm.age=age;
@@ -242,4 +247,56 @@ void Mainpage::OnBnClickedMod()
 			// you could do your own processing on nItem here
 		}
 	}
+}
+
+
+void Mainpage::On32773()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString FilePathName;
+	CFileDialog dlg(FALSE,"dat","student");///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	if(dlg.DoModal()==IDOK)
+	FilePathName=dlg.GetPathName();
+	string file(FilePathName);
+	this->Stumgt.backup(file);
+}
+
+
+void Mainpage::On32789()
+{
+	// TODO: 在此添加命令处理程序代码
+	Rollback rbfrm;
+	rbfrm.DoModal();
+}
+
+
+void Mainpage::On32779()
+{
+	// TODO: 在此添加命令处理程序代码
+	CDialogEx::OnOK();
+}
+
+
+void Mainpage::On32790()
+{
+	// TODO: 在此添加命令处理程序代码
+	this->Stumgt.mysort(true);
+	this->On32772();
+}
+
+
+void Mainpage::On32791()
+{
+	// TODO: 在此添加命令处理程序代码
+	this->Stumgt.mysort(false);
+	this->On32772();
+}
+
+
+void Mainpage::On_newbook()
+{
+	// TODO: 在此添加命令处理程序代码
+	Newbook nbfrm;
+	nbfrm.DoModal();
+
 }
