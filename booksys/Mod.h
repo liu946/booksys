@@ -36,4 +36,5 @@ public:
 	CEdit tx_name;
 	CEdit tx_sex;
 	CEdit tx_age;
+	bool stuchanging;
 };

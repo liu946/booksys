@@ -68,6 +68,8 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_COMMAND(ID_32777, &Mainpage::outofficer)
 	ON_COMMAND(ID_32774, &Mainpage::instudent)
 	ON_COMMAND(ID_32778, &Mainpage::inofficer)
+	ON_COMMAND(ID_32788, &Mainpage::outbook)
+	ON_COMMAND(ID_32787, &Mainpage::inbook)
 END_MESSAGE_MAP()
 
 
@@ -182,6 +184,11 @@ BOOL Mainpage::OnInitDialog()
 		this->GetMenu()->EnableMenuItem(ID_32797,MF_BYCOMMAND|MF_GRAYED);
 		this->GetMenu()->EnableMenuItem(ID_32798,MF_BYCOMMAND|MF_GRAYED);
 	}
+	if(this->isadminlogin){
+		this->GetMenu()->EnableMenuItem(ID_32781,MF_BYCOMMAND|MF_GRAYED);
+	}else{
+		this->GetMenu()->EnableMenuItem(ID_32781,MF_BYCOMMAND|MF_ENABLED);	
+	}
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
 }
@@ -241,8 +248,15 @@ void Mainpage::On32775()
 void Mainpage::On32781()
 {
 	// TODO: 在此添加命令处理程序代码
-	Mod modpage;
-	modpage.DoModal();
+			Mod modfrm;
+			
+			modfrm.id=this->curper.sentID();
+			modfrm.pwd=this->offmgt.IDfind(this->curper.sentID()).sentpassword();
+			modfrm.name=this->curper.sentname();
+			modfrm.sex=this->curper.sentsex();
+			modfrm.age=this->curper.sentage();
+			modfrm.stuchanging=true;
+			modfrm.DoModal();
 }
 
 
@@ -285,10 +299,15 @@ void Mainpage::OnBnClickedMod()
 			showlist.GetItemText(nItem,3,age,3);
 			Mod modfrm;
 			modfrm.id=id;
-			modfrm.pwd=this->Stumgt.IDfind(id).sentpassword();
+			if(this->showingstu){
+				modfrm.pwd=this->Stumgt.IDfind(id).sentpassword();
+			}else{
+				modfrm.pwd=this->offmgt.IDfind(id).sentpassword();
+			}
 			modfrm.name=name;
 			modfrm.sex=sex;
 			modfrm.age=age;
+			modfrm.stuchanging=false;
 			modfrm.DoModal();
 			// you could do your own processing on nItem here
 		}
@@ -449,7 +468,7 @@ void Mainpage::instudent()
 {
 	// TODO: 在此添加命令处理程序代码
 	CString FilePathName;
-	CFileDialog dlg(true);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	CFileDialog dlg(FALSE);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
 	if(dlg.DoModal()==IDOK)
 	FilePathName=dlg.GetPathName();
 	string file(FilePathName);
@@ -461,9 +480,33 @@ void Mainpage::inofficer()
 {
 	// TODO: 在此添加命令处理程序代码
 	CString FilePathName;
-	CFileDialog dlg(true);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	CFileDialog dlg(TRUE);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
 	if(dlg.DoModal()==IDOK)
 	FilePathName=dlg.GetPathName();
 	string file(FilePathName);
 	this->offmgt.rollback1(file);
+}
+
+
+void Mainpage::outbook()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString FilePathName;
+	CFileDialog dlg(FALSE,"txt","book");///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	if(dlg.DoModal()==IDOK)
+	FilePathName=dlg.GetPathName();
+	string file(FilePathName);
+	this->bkmgt.RollUp(this->bkmgt.AllNumber(),file);
+}
+
+
+void Mainpage::inbook()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString FilePathName;
+	CFileDialog dlg(TRUE);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	if(dlg.DoModal()==IDOK)
+	FilePathName=dlg.GetPathName();
+	string file(FilePathName);
+	this->bkmgt.BackUp(this->bkmgt.AllNumber(),file);
 }

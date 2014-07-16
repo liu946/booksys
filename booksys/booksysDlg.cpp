@@ -180,7 +180,6 @@ void CbooksysDlg::OnBnClickedOk()
 			lgerrfrm.DoModal();
 		}else{
 			Mainpage mp;
-			mp.name = name;
 			mp.isadminlogin=true;
 			mp.DoModal();
 		}
@@ -195,7 +194,7 @@ void CbooksysDlg::OnBnClickedOk()
 		}else
 		{
 			Mainpage mp;
-			mp.name = name;
+			mp.curper = _m;
 			mp.isadminlogin=false;
 			mp.DoModal();
 		}

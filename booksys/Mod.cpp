@@ -6,6 +6,7 @@
 #include "Mod.h"
 #include "afxdialogex.h"
 #include "Mainpage.h"
+#include "StuMainpage.h"
 
 // Mod 对话框
 
@@ -53,12 +54,17 @@ void Mod::OnBnClickedOk()
 	tx_age.GetWindowTextA(age,29);
 	tx_pwd.GetWindowTextA(pwd,29);
 	tx_sex.GetWindowTextA(sex,29);
-	if(((Mainpage*)this->GetParent())->showingstu){
-		this->stumgt.modify(id,pwd,name,sex,age);
-		((Mainpage*)this->GetParent())->On32772();
+	if(!this->stuchanging){
+		if(((Mainpage*)this->GetParent())->showingstu){
+			this->stumgt.modify(id,pwd,name,sex,age);
+			((Mainpage*)this->GetParent())->On32772();
+		}else{
+			this->offmgt.modify(id,pwd,name,sex,age);
+			((Mainpage*)this->GetParent())->offshow();
+		}
 	}else{
-		this->offmgt.modify(id,pwd,name,sex,age);
-		((Mainpage*)this->GetParent())->offshow();
+		this->stumgt.modify(id,pwd,name,sex,age);
+		((StuMainpage)this->GetParent()).curstu=this->stumgt.IDfind(id);
 	}
 	//发送一个消息，更新列表
 	CDialogEx::OnOK();

@@ -36,4 +36,5 @@ public:
 	afx_msg void relogin();
 	afx_msg void onexit();
 	string getstring (int n );
+	afx_msg void modself();
 };

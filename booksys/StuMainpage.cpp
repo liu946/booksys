@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include "booksysDlg.h"
 #include <string> 
+#include "Mod.h"
 using namespace std; 
 #include <sstream>
 #include <iostream>
@@ -55,6 +56,7 @@ BEGIN_MESSAGE_MAP(StuMainpage, CDialogEx)
 	ON_BN_CLICKED(IDC_GIVEBACK, &StuMainpage::OnBnClickedGiveback)
 	ON_COMMAND(ID_32792, &StuMainpage::relogin)
 	ON_COMMAND(ID_32793, &StuMainpage::onexit)
+	ON_COMMAND(ID_32794, &StuMainpage::modself)
 END_MESSAGE_MAP()
 
 
@@ -181,4 +183,18 @@ void StuMainpage::onexit()
 {
 	// TODO: 在此添加命令处理程序代码
 	CDialogEx::OnOK();
+}
+
+
+void StuMainpage::modself()
+{
+	// TODO: 在此添加命令处理程序代码
+			Mod modfrm;
+			modfrm.id=this->curstu.sentID();
+			modfrm.pwd=this->stumgt.IDfind(this->curstu.sentID()).sentpassword();
+			modfrm.name=this->curstu.sentname();
+			modfrm.sex=this->curstu.sentsex();
+			modfrm.age=this->curstu.sentage();
+			modfrm.stuchanging=true;
+			modfrm.DoModal();
 }

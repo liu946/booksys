@@ -62,4 +62,7 @@ public:
 	afx_msg void inofficer();
 	bool isadminlogin;
 	string getstring(int n);
+	Officer curper;
+	afx_msg void outbook();
+	afx_msg void inbook();
 };
