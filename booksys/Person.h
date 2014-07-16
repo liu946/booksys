@@ -6,7 +6,7 @@
 using namespace std;
 class Person
 {
-private:
+protected:
     string ID;
     string password;
 	string name;
@@ -25,9 +25,8 @@ public:
     {
 
     }
-    virtual int checkUser()
+    virtual void checkUser(string ,string)
     {
-        return 0;
     }
     void getID(string ID1);
     void getpassword(string s);

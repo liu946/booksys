@@ -7,7 +7,12 @@
 #include "booksysDlg.h"
 #include "afxdialogex.h"
 #include "Mainpage.h"
-
+#include "Person.h"
+#include "Manager.h"
+#include "Student.h"
+#include "Officer.h"
+#include "Loginerr.h"
+#include "StuMainpage.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -51,6 +56,7 @@ END_MESSAGE_MAP()
 
 CbooksysDlg::CbooksysDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(CbooksysDlg::IDD, pParent)
+
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -129,9 +135,7 @@ void CbooksysDlg::OnPaint()
 	if (IsIconic())
 	{
 		CPaintDC dc(this); // 用于绘制的设备上下文
-
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
-
 		// 使图标在工作区矩形中居中
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
@@ -162,12 +166,55 @@ void CbooksysDlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CDialogEx::OnOK();
-	Mainpage mp;
-	char strBuf[30];
-	GetDlgItemText(IDC_NAME,LPTSTR(strBuf),29);
+	char name[30];
+	char pwd[30];
+	GetDlgItemText(IDC_NAME,LPTSTR(name),29);
+	GetDlgItemText(IDC_PWD,LPTSTR(pwd),29);
+	Person * user;
+	if(((CButton *)GetDlgItem(IDC_ADMINLOGIN))->GetCheck()){
+		Manager _m;
+		user=&_m;
+		user->checkUser(name,pwd);
+		if(user->sentname()==""){
+			Loginerr lgerrfrm;
+			lgerrfrm.DoModal();
+		}else{
+			Mainpage mp;
+			mp.name = name;
+			mp.isadminlogin=true;
+			mp.DoModal();
+		}
+	}else if(((CButton *)GetDlgItem(IDC_WORKLOGIN))->GetCheck()){
+		Officer _m;
+		user=&_m;
+		user->checkUser(name,pwd);
+		if(user->sentname()=="")
+		{
+			Loginerr lgerrfrm;
+			lgerrfrm.DoModal();
+		}else
+		{
+			Mainpage mp;
+			mp.name = name;
+			mp.isadminlogin=false;
+			mp.DoModal();
+		}
+	}else{
+		Student _m;
+		user=&_m;
+		user->checkUser(name,pwd);
+		if(user->sentname()==""){
+			Loginerr lgerrfrm;
+			lgerrfrm.DoModal();
+		}else{
+			StuMainpage smp;
+			smp.curstu = _m;
+			smp.DoModal();
+		}
+	}
 	//SetDlgItemText(IDC_PWD,LPTSTR(strBuf));
-	mp.name = strBuf;
-	mp.DoModal();
+	
+
 }
 
 

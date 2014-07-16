@@ -1,20 +1,29 @@
 #include "stdafx.h"
-#include "CBook.h"
 #include <string>
 #include <stdlib.h>
 #include <fstream>
 #include <iostream>
+#include "CBook.h"
 using namespace std;
+#ifndef CBOOKMANGEMENT
+#define CBOOKMANGEMENT 1
 class CBookMangement
 {
-	/*public:
-	CBook book;*/
 public:
-	void AddBookInformation(string name, long id, int total, int curnum, int year, int month, int day);
-	CBook BookDateSearch(bool &end,int year, int month, int day);
-	CBook BookNameSearch(bool &end,string name);
-	CBook BookIDSearch(bool &end,long a);
-	void BookReturn(bool &end, long ID);
-	void BookDelete(bool &end, long ID);
-	void BookSent(bool &end, long ID);
+	void AddBookInformation(string name, long ID, int allnum, int nownum, int year, int month, int day);
+	void BookNameSearch(string name,CBook *bookName,int anum);
+	void BookIDSearch(long a,CBook *bookID,int anum);
+	void BookDateSearch(int year, int month, int day, CBook *bookDate,int anum);
+	int IDNumber(long ID,int num);
+	int NameNumber(string ,int num);
+	int DateNumber(int year, int month, int day,int num);
+	void BackUp(int num,string fname);
+	void RollUp(int num,string fname);
+	int AllNumber();
+	void ShowAllNumber(CBook *Book,int num);
+	void BookReturn(long ID,int num);
+	void BookDelete(long ID,int t, int num);
+	void BookSent(long ID,int num);
+
 };
+#endif

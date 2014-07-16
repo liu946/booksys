@@ -17,10 +17,13 @@ public:
      void modify(string ID2,string password2,string name2,string sex2,string age2);
      void delet(string ID2);
      bool comp(string a,string b);
-     bool sortage(Student a,Student b);
-     bool sortname(Student a,Student b);
+	 bool comp(int a,int b);
+     //bool sortage(Student a,Student b);
+     //bool sortname(Student a,Student b);
      void mysort(bool flag=true);
 	 void backup(string filename);
 	 bool rollback(string ID2,string filename);
 	 Student IDfind(string);
+	 void rollback1(string filename);
+	 void borrow(string ID2,string book2);
 };

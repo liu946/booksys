@@ -3,12 +3,14 @@
 #include <string>
 #include <iostream>
 using namespace std;
-struct Date
+#ifndef CBOOK
+#define CBOOK 1
+typedef struct Date1
 {
 	int year;
 	int month;
 	int day;
-};
+}Date;
 
 class CBook
 {
@@ -36,3 +38,4 @@ public:
 	void AddbookNumber();
 	void DebookNumber();
 };
+#endif

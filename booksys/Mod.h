@@ -2,6 +2,7 @@
 #include <string>
 #include "afxwin.h"
 #include "Studentmanagement.h"
+#include "Officermanagement.h"
 using namespace std;
 
 // Mod 对话框
@@ -22,7 +23,7 @@ public:
 	string sex;
 	string age;
 	Studentmanagement stumgt;
-
+	Officermanagement offmgt;
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 

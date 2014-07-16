@@ -3,6 +3,8 @@
 #include <string>
 #include "Studentmanagement.h"
 #include "afxcmn.h"
+#include "CBookMangement.h"
+#include "Officermanagement.h"
 using namespace std;
 // Mainpage 对话框
 
@@ -14,11 +16,13 @@ public:
 	Mainpage(CWnd* pParent = NULL);   // 标准构造函数
 	virtual ~Mainpage();
 	Studentmanagement Stumgt;
+	CBookMangement bkmgt;
 	//加载菜单
 	CMenu m_menu;
 	//用户数据
 	string name;
 // 对话框数据
+	Officermanagement offmgt;
 	enum { IDD = IDD_MAINPAGE };
 
 protected:
@@ -48,4 +52,14 @@ public:
 	afx_msg void On32790();
 	afx_msg void On32791();
 	afx_msg void On_newbook();
+	afx_msg void On32786();
+	afx_msg void offshow();
+	bool showingstu;
+	afx_msg void On32797();
+	afx_msg void On32798();
+	afx_msg void outofficer();
+	afx_msg void instudent();
+	afx_msg void inofficer();
+	bool isadminlogin;
+	string getstring(int n);
 };

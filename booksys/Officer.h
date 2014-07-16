@@ -1,8 +1,8 @@
 #pragma once
 #include "Person.h"
-class officer:public Person
+class Officer:public Person
 {
 public:
-    void showMenu();
-    int checkUser();
+	void showMenu(){}
+    void checkUser(string name,string pwd);
 };

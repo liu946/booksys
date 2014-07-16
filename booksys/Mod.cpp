@@ -53,8 +53,13 @@ void Mod::OnBnClickedOk()
 	tx_age.GetWindowTextA(age,29);
 	tx_pwd.GetWindowTextA(pwd,29);
 	tx_sex.GetWindowTextA(sex,29);
-	this->stumgt.modify(id,pwd,name,sex,age);
-	((Mainpage*)this->GetParent())->On32772();
+	if(((Mainpage*)this->GetParent())->showingstu){
+		this->stumgt.modify(id,pwd,name,sex,age);
+		((Mainpage*)this->GetParent())->On32772();
+	}else{
+		this->offmgt.modify(id,pwd,name,sex,age);
+		((Mainpage*)this->GetParent())->offshow();
+	}
 	//发送一个消息，更新列表
 	CDialogEx::OnOK();
 }

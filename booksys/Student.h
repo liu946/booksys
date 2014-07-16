@@ -4,6 +4,9 @@
 class Student:public Person
 {
 public:
-   // void showMenu(){}
-    //int checkUser(){return 0;}
+    void showMenu(){}
+    void checkUser(string name,string pwd);
+	void borrow(string IDbook);
+	void lent(string IDbook);
+	string checkbook();
 };

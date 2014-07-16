@@ -2,64 +2,26 @@
 #include "Studentmanagement.h"
 #include <algorithm>
 #include <string>
+#include <stdlib.h>
 using namespace std;
 bool Studentmanagement::comp(string a,string b)
 {
 	return a < b;
 }
-bool Studentmanagement::sortage(Student a,Student b)
+bool Studentmanagement::comp(int a,int b)
+{
+	return a<b;
+}
+/*bool Studentmanagement::sortage(Student a,Student b)
 {
 	return comp(a.sentage(),b.sentage());
 }
 bool Studentmanagement::sortname(Student a,Student b)
 {
 	return comp(a.sentname(),b.sentname());
-}
+}*/
 //排序函数
-void Studentmanagement::mysort(bool flag)
-{
-    Student c[1000];
-    int i=0;
-    fstream fileStudent;
-    fileStudent.open("Student.dat",ios::in);
-    while(!fileStudent.eof())
-    {
-        string ID1,password1,name1,sex1,book1;
-        string age1;
-        fileStudent>>ID1;
-		if(ID1=="")break;
-		fileStudent>>password1>>name1>>sex1>>age1>>book1;
-        c[i].getID(ID1);
-        c[i].getpassword(password1);
-        c[i].getname(name1);
-        c[i].getsex(sex1);
-        c[i].getage(age1);
-        c[i].getbook(book1);
-        i++;
-    }
-    fileStudent.close();
-    if(flag==true)
-    {
-        //std::sort(c,c+i,sortname);
-        fileStudent.open("student.dat",ios::out);
-        for(int j=0;j<i;j++)
-        {
-            fileStudent<<c[j].sentID()<<' '<<c[j].sentpassword()<<' '<<c[j].sentname()<<' '<<c[j].sentsex()<<' '<<c[j].sentage()<<' '<<c[j].sentbook()<<endl;
-        }
-        fileStudent.close();
-    }
-    else
-    {
-       // sort(c,c+i,sortage);
-        fileStudent.open("student.dat",ios::out);
-        for(int j=0;j<i;j++)
-        {
-            fileStudent<<c[j].sentID()<<' '<<c[j].sentpassword()<<' '<<c[j].sentname()<<' '<<c[j].sentsex()<<' '<<c[j].sentage()<<' '<<c[j].sentbook()<<endl;
-        }
-        fileStudent.close();
-    }
 
-}
 //添加多人函数
 /*void Studentmanagement::add(int n)
 {
@@ -135,7 +97,7 @@ Student Studentmanagement::show(bool &x)
         a.getname(name1);
         a.getsex(sex1);
         a.getage(age1);
-        a.getbook(book1);
+		a.getbook(a.checkbook());
         return a;
     }
 	file.close();
@@ -169,7 +131,7 @@ Student Studentmanagement::nextname(bool &y)
             a.getname(name1);
             a.getsex(sex1);
             a.getage(age1);
-            a.getbook(book1);
+			a.getbook(a.checkbook());
             return a;
         }
         else return nextname(y);
@@ -199,7 +161,7 @@ Student Studentmanagement::nextid(bool &z)
             a.getname(name1);
             a.getsex(sex1);
             a.getage(age1);
-            a.getbook(book1);
+			a.getbook(a.checkbook());
             return a;
         }
         else return nextid(z);
@@ -327,4 +289,129 @@ Student Studentmanagement::IDfind(string ID2)
     }
 	Student b;
     return b;
+}
+
+void Studentmanagement::mysort(bool flag)
+{
+    Student c[1000];
+    int i=0;
+    fstream fileStudent;
+    fileStudent.open("student.dat",ios::in);
+    while(!fileStudent.eof())
+    {
+        string ID1,password1,name1,sex1,book1;
+        string age1;
+        fileStudent>>ID1;
+if(ID1=="")break;
+fileStudent>>password1>>name1>>sex1>>age1>>book1;
+        c[i].getID(ID1);
+        c[i].getpassword(password1);
+        c[i].getname(name1);
+        c[i].getsex(sex1);
+        c[i].getage(age1);
+        c[i].getbook(book1);
+        i++;
+    }
+    fileStudent.close();
+    if(flag==true)
+    {
+        for(int j=0;j<i;j++)
+        {
+            Student min1=c[j];
+            int l=j;
+            for(int k=j;k<i;k++)
+            {
+                if(comp(min1.sentname(),c[k].sentname()))
+                {
+                    min1=c[k];
+                    l=k;
+                }
+            }
+            Student tmp;
+            tmp=c[j];
+            c[j]=c[l];
+            c[l]=tmp;
+        }
+        fileStudent.open("student.dat",ios::out);
+        for(int j=0;j<i;j++)
+        {
+            fileStudent<<c[j].sentID()<<' '<<c[j].sentpassword()<<' '<<c[j].sentname()<<' '<<c[j].sentsex()<<' '<<c[j].sentage()<<' '<<c[j].sentbook()<<endl;
+        }
+        fileStudent.close();
+    }
+    else
+    {
+        for(int j=0;j<i;j++)
+        {
+            Student min1=c[j];
+            int l=j;
+            for(int k=j;k<i;k++)
+            {
+				if(comp(atoi(min1.sentage().c_str()),atoi(c[k].sentage().c_str())))
+                {
+                    min1=c[k];
+                    l=k;
+                }
+            }
+            Student tmp;
+            tmp=c[j];
+            c[j]=c[l];
+            c[l]=tmp;
+        }
+        fileStudent.open("student.dat",ios::out);
+        for(int j=0;j<i;j++)
+        {
+            fileStudent<<c[j].sentID()<<' '<<c[j].sentpassword()<<' '<<c[j].sentname()<<' '<<c[j].sentsex()<<' '<<c[j].sentage()<<' '<<c[j].sentbook()<<endl;
+        }
+        fileStudent.close();
+    }
+
+}
+
+void Studentmanagement::rollback1(string filename)
+{
+    fstream filestudent1,filestudent2;
+    filestudent1.open(filename,ios::in);
+    filestudent2.open("student.dat",ios::out);
+    while(!filestudent1.eof())
+    {
+        string ID1,password1,name1,sex1,age1,book1;
+        filestudent1>>ID1>>password1>>name1>>sex1>>age1>>book1;
+        filestudent2<<ID1<<' '<<password1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
+    }
+    filestudent1.close();
+    filestudent2.close();
+}
+
+
+void Studentmanagement::borrow(string ID2,string book2)
+{
+    fstream file,file1;
+    string ID1,pwd1,name1,sex1,age1,book1;
+    file.open("student.dat",ios::in);
+    file1.open("student1.dat",ios::out);
+    while(!file.eof())
+    {
+        file>>ID1>>pwd1>>name1>>sex1>>age1>>book1;
+        if(ID1==ID2)
+        {
+            if(book1=="null")
+                book1="*"+book2;
+            else book1+=("*"+book2);
+        }
+        file1<<ID1<<' '<<pwd1<<' '<<name1<<' '<<sex1<<' '<<age1<<' '<<book1<<endl;
+    }
+    file.close();
+    file1.close();
+    file.open("student.dat",ios::out);
+    file1.open("student1.dat",ios::in);
+    while(!file1.eof())
+    {
+        string ID3,pwd3,name3,sex3,age3,book3;
+        file1>>ID3>>pwd3>>name3>>sex3>>age3>>book3;
+        file<<ID3<<' '<<pwd3<<' '<<name3<<' '<<sex3<<' '<<age3<<' '<<book3<<endl;
+            
+    }
+    file.close();
+    file1.close();
 }

@@ -11,7 +11,11 @@
 #include "Mod.h"
 #include "Rollback.h"
 #include "Newbook.h"
-
+#include "AddOfficer.h"
+#include "Officer.h"
+#include <sstream>
+#include <iostream>
+#include <stdlib.h>
 // Mainpage 对话框
 
 IMPLEMENT_DYNAMIC(Mainpage, CDialogEx)
@@ -57,6 +61,13 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_COMMAND(ID_32790, &Mainpage::On32790)
 	ON_COMMAND(ID_32791, &Mainpage::On32791)
 	ON_COMMAND(ID_32785, &Mainpage::On_newbook)
+	ON_COMMAND(ID_32786, &Mainpage::On32786)
+	ON_COMMAND(ID_32776, &Mainpage::offshow)
+	ON_COMMAND(ID_32797, &Mainpage::On32797)
+	ON_COMMAND(ID_32798, &Mainpage::On32798)
+	ON_COMMAND(ID_32777, &Mainpage::outofficer)
+	ON_COMMAND(ID_32774, &Mainpage::instudent)
+	ON_COMMAND(ID_32778, &Mainpage::inofficer)
 END_MESSAGE_MAP()
 
 
@@ -71,32 +82,60 @@ void Mainpage::OnBnClickedButton2()
 		//this->showlist.DeleteColumn(0);
 		//this->showlist.DeleteColumn(1);
 		//this->showlist.DeleteColumn(2);
-
+	if(this->showingstu){
 		clearlist();
 		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
 		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
 		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
 		this->showlist.InsertColumn(3,"年龄",LVCFMT_LEFT,80,3);
 		this->showlist.InsertColumn(4,"借书情况",LVCFMT_LEFT,80,4);
-	char strBuf[21];
-	this->search.GetWindowTextA(strBuf,20);
-	this->Stumgt.finds(strBuf);
-	bool flag=true;
-	int i=0;
-	while(flag){
-		Student tempstu;
-		if(((CButton *)GetDlgItem(IDC_BYNAME))->GetCheck()){
-			tempstu=this->Stumgt.nextname(flag);
-		}else{
-			tempstu=this->Stumgt.nextid(flag);
+		char strBuf[21];
+		this->search.GetWindowTextA(strBuf,20);
+		this->Stumgt.finds(strBuf);
+		bool flag=true;
+		int i=0;
+		while(flag){
+			Student tempstu;
+			if(((CButton *)GetDlgItem(IDC_BYNAME))->GetCheck()){
+				tempstu=this->Stumgt.nextname(flag);
+			}else{
+				tempstu=this->Stumgt.nextid(flag);
+			}
+			if(tempstu.sentname()=="")break;
+			this->showlist.InsertItem(i,LPCTSTR(tempstu.sentID().c_str()));       //插入行
+			this->showlist.SetItemText(i,1,LPCTSTR(tempstu.sentname().c_str()));    //设置该行的不同列的显示字符
+			this->showlist.SetItemText(i,2,LPCTSTR(tempstu.sentsex().c_str()));    
+			this->showlist.SetItemText(i,3,LPCTSTR(tempstu.sentage().c_str()));    
+			this->showlist.SetItemText(i,4,LPCTSTR(tempstu.sentbook().c_str()));  
+			i++;
 		}
-		if(tempstu.sentname()=="")break;
-		this->showlist.InsertItem(i,LPCTSTR(tempstu.sentID().c_str()));       //插入行
-		this->showlist.SetItemText(i,1,LPCTSTR(tempstu.sentname().c_str()));    //设置该行的不同列的显示字符
-		this->showlist.SetItemText(i,2,LPCTSTR(tempstu.sentsex().c_str()));    
-		this->showlist.SetItemText(i,3,LPCTSTR(tempstu.sentage().c_str()));    
-		this->showlist.SetItemText(i,4,LPCTSTR(tempstu.sentbook().c_str()));  
-		i++;
+	}else{
+		clearlist();
+		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
+		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
+		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
+		this->showlist.InsertColumn(3,"年龄",LVCFMT_LEFT,80,3);
+		this->showlist.InsertColumn(4,"借书情况",LVCFMT_LEFT,80,4);
+		char strBuf[21];
+		this->search.GetWindowTextA(strBuf,20);
+		this->offmgt.finds(strBuf);
+		bool flag=true;
+		int i=0;
+		while(flag){
+			Officer tempoff;
+			if(((CButton *)GetDlgItem(IDC_BYNAME))->GetCheck()){
+				tempoff=this->offmgt.nextname(flag);
+			}else{
+				tempoff=this->offmgt.nextid(flag);
+			}
+			if(tempoff.sentname()=="")break;
+			this->showlist.InsertItem(i,LPCTSTR(tempoff.sentID().c_str()));       //插入行
+			this->showlist.SetItemText(i,1,LPCTSTR(tempoff.sentname().c_str()));    //设置该行的不同列的显示字符
+			this->showlist.SetItemText(i,2,LPCTSTR(tempoff.sentsex().c_str()));    
+			this->showlist.SetItemText(i,3,LPCTSTR(tempoff.sentage().c_str()));    
+			this->showlist.SetItemText(i,4,LPCTSTR(tempoff.sentbook().c_str()));  
+			i++;
+		}
 	}
 }
 
@@ -128,12 +167,21 @@ BOOL Mainpage::OnInitDialog()
 	//dwStyle |= LVS_EX_GRIDLINES;//网格线（只适用与report风格的listctrl）
 //	dwStyle |= LVS_EX_CHECKBOXES;//item前生成checkbox控件
 	showlist.SetExtendedStyle(dwStyle);
-	//设置列标题
-	//InsertColumn第三个参数可设置为LVCFMT_LEFT, LVCFMT_RIGHT, or LVCFMT_CENTER
-	//解决第一列始终靠左的问题
-	//showlist.DeleteColumn(0);
-	//加载
-
+	if(this->isadminlogin){
+		this->GetMenu()->EnableMenuItem(ID_32775,MF_BYCOMMAND|MF_ENABLED);
+		this->GetMenu()->EnableMenuItem(ID_32776,MF_BYCOMMAND|MF_ENABLED);
+		this->GetMenu()->EnableMenuItem(ID_32777,MF_BYCOMMAND|MF_ENABLED);
+		this->GetMenu()->EnableMenuItem(ID_32778,MF_BYCOMMAND|MF_ENABLED);
+		this->GetMenu()->EnableMenuItem(ID_32797,MF_BYCOMMAND|MF_ENABLED);
+		this->GetMenu()->EnableMenuItem(ID_32798,MF_BYCOMMAND|MF_ENABLED);
+	}else{
+		this->GetMenu()->EnableMenuItem(ID_32775,MF_BYCOMMAND|MF_GRAYED);
+		this->GetMenu()->EnableMenuItem(ID_32776,MF_BYCOMMAND|MF_GRAYED);
+		this->GetMenu()->EnableMenuItem(ID_32777,MF_BYCOMMAND|MF_GRAYED);
+		this->GetMenu()->EnableMenuItem(ID_32778,MF_BYCOMMAND|MF_GRAYED);
+		this->GetMenu()->EnableMenuItem(ID_32797,MF_BYCOMMAND|MF_GRAYED);
+		this->GetMenu()->EnableMenuItem(ID_32798,MF_BYCOMMAND|MF_GRAYED);
+	}
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// 异常: OCX 属性页应返回 FALSE
 }
@@ -178,13 +226,15 @@ void Mainpage::On32772()
 		}
 		i++;
 	}
-
+	showingstu=true;
 }
 
-
+//add officer
 void Mainpage::On32775()
 {
 	// TODO: 在此添加命令处理程序代码
+	AddOfficer adds;
+	adds.DoModal();
 }
 
 
@@ -214,10 +264,6 @@ void Mainpage::OnBnClickedDel()
 		}
 	}
 }
-
-
-
-
 
 void Mainpage::OnBnClickedMod()
 {
@@ -273,10 +319,11 @@ void Mainpage::On32789()
 void Mainpage::On32779()
 {
 	// TODO: 在此添加命令处理程序代码
+	
 	CDialogEx::OnOK();
 }
 
-
+//按名字排序
 void Mainpage::On32790()
 {
 	// TODO: 在此添加命令处理程序代码
@@ -284,7 +331,7 @@ void Mainpage::On32790()
 	this->On32772();
 }
 
-
+//按id排序
 void Mainpage::On32791()
 {
 	// TODO: 在此添加命令处理程序代码
@@ -299,4 +346,124 @@ void Mainpage::On_newbook()
 	Newbook nbfrm;
 	nbfrm.DoModal();
 
+}
+
+
+void Mainpage::On32786()
+{
+	// TODO: 在此添加命令处理程序代码
+	int lines=this->bkmgt.AllNumber();
+	CBook *books = new CBook[lines];
+	this->bkmgt.ShowAllNumber(books,lines);
+	clearlist();
+		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
+		this->showlist.InsertColumn(1,"书名",LVCFMT_LEFT,80,1);
+		this->showlist.InsertColumn(2,"现有数量",LVCFMT_LEFT,80,2);
+		this->showlist.InsertColumn(3,"总数",LVCFMT_LEFT,80,3);
+		this->showlist.InsertColumn(4,"入库日期",LVCFMT_LEFT,80,4);
+	for(int i=0;i<lines;i++){
+		this->showlist.InsertItem(i,LPCTSTR(getstring(books[i].GetbookID()).c_str()));   
+		this->showlist.SetItemText(i,1,LPCTSTR(books[i].GetbookName().c_str()));    //设置该行的不同列的显示字符
+		this->showlist.SetItemText(i,2,LPCTSTR(getstring(books[i].GetbookNowNumber()).c_str()));
+		this->showlist.SetItemText(i,3,LPCTSTR(getstring(books[i].GetbookAllNumber()).c_str()));
+		//
+		string data;
+		data += getstring(books[i].GetbookDateyear());
+		data +="-";
+		data += getstring(books[i].GetbookDatemonth());
+		data +="-";
+		data += getstring(books[i].GetbookDateday());
+		
+		this->showlist.SetItemText(i,4,LPCTSTR(data.c_str()));   
+	}
+	delete [] books;
+}
+//转换函数
+string Mainpage::getstring (int n )
+{
+	stringstream newstr;
+	newstr<<n;
+	return newstr.str();
+}
+
+void Mainpage::offshow()
+{
+	// TODO: 在此添加命令处理程序代码
+	clearlist();
+	bool endflag=true;
+	offmgt.file.open("officer.dat",ios::in );
+	if(!this->offmgt.file){this->offmgt.file.close();return;}
+		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
+		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
+		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
+		this->showlist.InsertColumn(3,"年龄",LVCFMT_LEFT,80,3);
+		this->showlist.InsertColumn(4,"借书情况",LVCFMT_LEFT,80,4);
+		int i=0;
+	while(endflag){
+		Officer tempoff;
+		tempoff = offmgt.show(endflag);
+		if(!(tempoff.sentname() == "")){
+			//string data = tempstu->sentID() +"\t" + tempstu->sentname()+"\t"+tempstu->sentsex()+"\t" + age +"\t"+tempstu->sentbook();
+			//this->showlist.AddString(LPCTSTR(data.c_str()));
+			this->showlist.InsertItem(i,LPCTSTR(tempoff.sentID().c_str()));       //插入行
+			this->showlist.SetItemText(i,1,LPCTSTR(tempoff.sentname().c_str()));    //设置该行的不同列的显示字符
+			this->showlist.SetItemText(i,2,LPCTSTR(tempoff.sentsex().c_str()));    
+			this->showlist.SetItemText(i,3,LPCTSTR(tempoff.sentage().c_str()));    
+			this->showlist.SetItemText(i,4,LPCTSTR(tempoff.sentbook().c_str()));    
+		}
+		i++;
+	}
+	this->showingstu=false;
+}
+
+
+void Mainpage::On32797()
+{
+	// TODO: 在此添加命令处理程序代码
+	this->offmgt.mysort(true);
+	this->offshow();
+}
+
+
+void Mainpage::On32798()
+{
+	// TODO: 在此添加命令处理程序代码
+	this->offmgt.mysort(false);
+	this->offshow();
+}
+
+
+void Mainpage::outofficer()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString FilePathName;
+	CFileDialog dlg(FALSE,"dat","officer");///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	if(dlg.DoModal()==IDOK)
+	FilePathName=dlg.GetPathName();
+	string file(FilePathName);
+	this->offmgt.backup(file);
+}
+
+
+void Mainpage::instudent()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString FilePathName;
+	CFileDialog dlg(true);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	if(dlg.DoModal()==IDOK)
+	FilePathName=dlg.GetPathName();
+	string file(FilePathName);
+	this->Stumgt.rollback1(file);
+}
+
+
+void Mainpage::inofficer()
+{
+	// TODO: 在此添加命令处理程序代码
+	CString FilePathName;
+	CFileDialog dlg(true);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
+	if(dlg.DoModal()==IDOK)
+	FilePathName=dlg.GetPathName();
+	string file(FilePathName);
+	this->offmgt.rollback1(file);
 }

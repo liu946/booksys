@@ -78,6 +78,15 @@
     <ClInclude Include="Newbook.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="StuMainpage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Officermanagement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AddOfficer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="booksys.cpp">
@@ -126,6 +135,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Newbook.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StuMainpage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Officermanagement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AddOfficer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

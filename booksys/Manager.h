@@ -1,10 +1,9 @@
 #pragma once
 #include "Person.h"
-class Manager :
-	public Person
+class Manager :public Person
 {
 public:
-	Manager(void);
-	~Manager(void);
+	void showMenu(){}
+    void checkUser(string name,string pwd);
 };
 
