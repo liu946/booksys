@@ -20,6 +20,7 @@ public:
 	void BackUp(int num,string fname);
 	void RollUp(int num,string fname);
 	int AllNumber();
+	int ALLNumberNEW(string fname);
 	void ShowAllNumber(CBook *Book,int num);
 	void BookReturn(long ID,int num);
 	void BookDelete(long ID,int t, int num);

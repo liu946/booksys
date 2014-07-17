@@ -66,8 +66,38 @@ string Student::checkbook()
         file>>IDp2>>IDb2;
         if(IDp2==this->sentID()) num++;
     }
+	file.close();
 	char i[5];
     itoa(num,i,4);
 	string s(i);
 	return s; 
+}
+
+
+int Student::numbook(string ID2)
+{
+    fstream file;
+    int num=0;
+    file.open("connect.dat",ios::in);
+    while(!file.eof())
+    {
+        string ID1,book1;
+        file>>ID1>>book1;
+        if(ID1==ID2) num++;
+    }
+    file.close();
+    return num++;
+}
+void Student::returnbook(string a[])
+{
+    fstream file;
+    int i=0;
+    file.open("connect.dat",ios::in);
+    while(!file.eof())
+    {
+        string ID1,book1;
+        file>>ID1>>book1;
+		if(ID1==this->ID) a[i++]=book1;
+    }
+    file.close();
 }

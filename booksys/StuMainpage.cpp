@@ -12,6 +12,7 @@
 #include "booksysDlg.h"
 #include <string> 
 #include "Mod.h"
+#include "help.h"
 using namespace std; 
 #include <sstream>
 #include <iostream>
@@ -57,6 +58,8 @@ BEGIN_MESSAGE_MAP(StuMainpage, CDialogEx)
 	ON_COMMAND(ID_32792, &StuMainpage::relogin)
 	ON_COMMAND(ID_32793, &StuMainpage::onexit)
 	ON_COMMAND(ID_32794, &StuMainpage::modself)
+	ON_COMMAND(ID_32795, &StuMainpage::myborrowinfo)
+	ON_COMMAND(ID_32799, &StuMainpage::helpdoc)
 END_MESSAGE_MAP()
 
 
@@ -68,7 +71,7 @@ void StuMainpage::OnBnClickedSearchbtn()
 	// TODO: 在此添加控件通知处理程序代码
 	clearlist();
 	this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
-	this->showlist.InsertColumn(1,"书名",LVCFMT_LEFT,80,1);
+	this->showlist.InsertColumn(1,"书名",LVCFMT_LEFT,140,1);
 	this->showlist.InsertColumn(2,"现有数量",LVCFMT_LEFT,80,2);
 	this->showlist.InsertColumn(3,"总数",LVCFMT_LEFT,80,3);
 	this->showlist.InsertColumn(4,"入库日期",LVCFMT_LEFT,80,4);
@@ -107,8 +110,6 @@ void StuMainpage::OnBnClickedSearchbtn()
 		}
 		delete [] bookid;
 
-	
-
 }
 void StuMainpage::clearlist(){
 		showlist.DeleteAllItems();
@@ -139,12 +140,12 @@ void StuMainpage::OnBnClickedBorrow()
 			char bookname[29];
 			showlist.GetItemText(nItem,0,id,19);
 			showlist.GetItemText(nItem,1,bookname,29);
-			bool _x(true);
-			this->bkmgt.BookSent(_x,atoi(id));
+			this->bkmgt.BookSent(atoi(id),this->bkmgt.AllNumber());
 			this->curstu.borrow(id);
 			// you could do your own processing on nItem here
 		}
 	}
+	this->OnBnClickedSearchbtn();
 }
 
 void StuMainpage::OnBnClickedGiveback()
@@ -163,11 +164,12 @@ void StuMainpage::OnBnClickedGiveback()
 			showlist.GetItemText(nItem,0,id,19);
 			showlist.GetItemText(nItem,1,bookname,29);
 			bool _x(true);
-			this->bkmgt.BookReturn(_x,atoi(id));
+			this->bkmgt.BookReturn(atoi(id),this->bkmgt.AllNumber());
 			this->curstu.lent(id);
 			// you could do your own processing on nItem here
 		}
 	}
+	this->OnBnClickedSearchbtn();
 }
 
 void StuMainpage::relogin()
@@ -197,4 +199,54 @@ void StuMainpage::modself()
 			modfrm.age=this->curstu.sentage();
 			modfrm.stuchanging=true;
 			modfrm.DoModal();
+}
+
+
+void StuMainpage::myborrowinfo()
+{
+	// TODO: 在此添加命令处理程序代码
+	int num;
+			this->clearlist();
+			this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
+			this->showlist.InsertColumn(1,"书名",LVCFMT_LEFT,140,1);
+			this->showlist.InsertColumn(2,"现有数量",LVCFMT_LEFT,80,2);
+			this->showlist.InsertColumn(3,"总数",LVCFMT_LEFT,80,3);
+			this->showlist.InsertColumn(4,"入库日期",LVCFMT_LEFT,80,4);
+	num = this->curstu.numbook(this->curstu.sentID());
+	string * s = new string[num];
+	this->curstu.returnbook(s);
+	for(int i=0;i<num;i++){
+		int _n;
+		_n = this->bkmgt.IDNumber(atoi(s[i].c_str()),this->bkmgt.AllNumber());
+		CBook * pbk;
+		pbk = new CBook[_n];
+		this->bkmgt.BookIDSearch(atoi(s[i].c_str()),pbk,this->bkmgt.AllNumber());
+		//处理列表
+		this->showlist.InsertItem(i,LPCTSTR(getstring(pbk[0].GetbookID()).c_str()));   
+		this->showlist.SetItemText(i,1,LPCTSTR(pbk[0].GetbookName().c_str()));    //设置该行的不同列的显示字符
+		this->showlist.SetItemText(i,2,LPCTSTR(getstring(pbk[0].GetbookNowNumber()).c_str()));
+		this->showlist.SetItemText(i,3,LPCTSTR(getstring(pbk[0].GetbookAllNumber()).c_str()));
+		//
+		string data;
+		data += getstring(pbk[0].GetbookDateyear());
+		data +="-";
+		data += getstring(pbk[0].GetbookDatemonth());
+		data +="-";
+		data += getstring(pbk[0].GetbookDateday());
+		
+		this->showlist.SetItemText(i,4,LPCTSTR(data.c_str()));   
+		//
+		delete [] pbk;
+	}
+	delete [] s;
+
+	
+}
+
+
+void StuMainpage::helpdoc()
+{
+	// TODO: 在此添加命令处理程序代码
+	help hpfrm;
+	hpfrm.DoModal();
 }

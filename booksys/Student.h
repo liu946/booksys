@@ -9,4 +9,6 @@ public:
 	void borrow(string IDbook);
 	void lent(string IDbook);
 	string checkbook();
+	int numbook(string );
+	void returnbook(string *);
 };

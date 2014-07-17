@@ -55,6 +55,7 @@ public:
 	afx_msg void On32786();
 	afx_msg void offshow();
 	bool showingstu;
+	bool showingbook;
 	afx_msg void On32797();
 	afx_msg void On32798();
 	afx_msg void outofficer();
@@ -65,4 +66,8 @@ public:
 	Officer curper;
 	afx_msg void outbook();
 	afx_msg void inbook();
+//	afx_msg void OnLvnColumnclickList1(NMHDR *pNMHDR, LRESULT *pResult);
+	CButton modbtn;
+	afx_msg void OnNMClickList1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void helpdoc();
 };

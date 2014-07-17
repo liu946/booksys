@@ -1,0 +1,281 @@
+﻿生成启动时间为 2014/7/17 12:28:36。
+     1>项目“E:\study\MFC\my project\booksys\booksys\booksys.vcxproj”在节点 2 上(build 个目标)。
+     1>PrepareForBuild:
+         正在创建目录“E:\study\MFC\my project\booksys\Release\”。
+       InitializeBuildStatus:
+         正在创建“Release\booksys.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         d:\vs\程序\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\booksys.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         d:\vs\程序\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /Gm- /EHsc /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\booksys.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt AddOfficer.cpp AddStudent.cpp CBook.cpp CBookMangement.cpp help.cpp Mod.cpp Newbook.cpp Officermanagement.cpp Rollback.cpp Studentmanagement.cpp booksys.cpp booksysDlg.cpp Loginerr.cpp Mainpage.cpp Manager.cpp Officer.cpp Person.cpp Student.cpp StuMainpage.cpp
+         AddOfficer.cpp
+         AddStudent.cpp
+         CBook.cpp
+         CBookMangement.cpp
+         help.cpp
+         Mod.cpp
+     1>Mod.cpp(52): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(53): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(54): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(55): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(56): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(77): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(78): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(79): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(80): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mod.cpp(81): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+         Newbook.cpp
+     1>Newbook.cpp(56): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Newbook.cpp(57): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Newbook.cpp(58): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Newbook.cpp(59): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Newbook.cpp(60): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Newbook.cpp(61): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Newbook.cpp(68): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+         Officermanagement.cpp
+         Rollback.cpp
+     1>Rollback.cpp(44): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Rollback.cpp(49): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+     1>Rollback.cpp(53): error C2039: “SetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+         Studentmanagement.cpp
+         booksys.cpp
+         booksysDlg.cpp
+         Loginerr.cpp
+         Mainpage.cpp
+     1>Mainpage.cpp(94): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(95): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(96): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(97): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(98): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(100): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mainpage.cpp(121): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(122): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(123): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(124): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(125): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(127): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>Mainpage.cpp(165): error C2039: “SetWindowTextA”: 不是“Mainpage”的成员
+                 e:\study\mfc\my project\booksys\booksys\Mainpage.h(11) : 参见“Mainpage”的声明
+     1>Mainpage.cpp(217): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(218): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(219): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(220): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(221): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(279): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [20]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(307): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [20]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(308): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [30]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(309): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [5]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(310): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [4]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(333): error C2664: “CFileDialog::CFileDialog(BOOL,LPCTSTR,LPCTSTR,DWORD,LPCTSTR,CWnd *,DWORD,BOOL)”: 不能将参数 2 从“const char [4]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(336): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+     1>Mainpage.cpp(388): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(389): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(390): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(391): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(392): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(427): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(428): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(429): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(430): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(431): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(473): error C2664: “CFileDialog::CFileDialog(BOOL,LPCTSTR,LPCTSTR,DWORD,LPCTSTR,CWnd *,DWORD,BOOL)”: 不能将参数 2 从“const char [4]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(477): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+     1>Mainpage.cpp(490): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+     1>Mainpage.cpp(503): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+     1>Mainpage.cpp(512): error C2664: “CFileDialog::CFileDialog(BOOL,LPCTSTR,LPCTSTR,DWORD,LPCTSTR,CWnd *,DWORD,BOOL)”: 不能将参数 2 从“const char [4]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>Mainpage.cpp(515): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+     1>Mainpage.cpp(528): error C2664: “std::basic_string<_Elem,_Traits,_Ax>::basic_string(const std::basic_string<_Elem,_Traits,_Ax> &)”: 不能将参数 1 从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax> &”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 原因如下: 无法从“CString”转换为“const std::basic_string<_Elem,_Traits,_Ax>”
+                 with
+                 [
+                     _Elem=char,
+                     _Traits=std::char_traits<char>,
+                     _Ax=std::allocator<char>
+                 ]
+                 没有可用于执行该转换的用户定义的转换运算符，或者无法调用该运算符
+         Manager.cpp
+         Officer.cpp
+         Person.cpp
+         Student.cpp
+     1>Student.cpp(71): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 d:\vs\程序\VC\include\stdlib.h(867) : 参见“itoa”的声明
+         StuMainpage.cpp
+     1>StuMainpage.cpp(73): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(74): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(75): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(76): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(77): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(80): error C2039: “GetWindowTextA”: 不是“CEdit”的成员
+                 d:\vs\程序\VC\atlmfc\include\afxwin.h(3911) : 参见“CEdit”的声明
+     1>StuMainpage.cpp(141): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [20]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(142): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [29]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(164): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [20]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(165): error C2664: “int CListCtrl::GetItemText(int,int,LPTSTR,int) const”: 不能将参数 3 从“char [29]”转换为“LPTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(210): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [3]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(211): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(212): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(213): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [5]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>StuMainpage.cpp(214): error C2664: “int CListCtrl::InsertColumn(int,LPCTSTR,int,int,int)”: 不能将参数 2 从“const char [9]”转换为“LPCTSTR”
+                 与指向的类型无关；转换要求 reinterpret_cast、C 样式转换或函数样式转换
+     1>已完成生成项目“E:\study\MFC\my project\booksys\booksys\booksys.vcxproj”(build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:09.65

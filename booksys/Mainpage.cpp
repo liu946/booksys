@@ -13,6 +13,7 @@
 #include "Newbook.h"
 #include "AddOfficer.h"
 #include "Officer.h"
+#include "help.h"
 #include <sstream>
 #include <iostream>
 #include <stdlib.h>
@@ -39,6 +40,7 @@ void Mainpage::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_SEARCH, search);
 	DDX_Control(pDX, IDC_LIST1, showlist);
+	DDX_Control(pDX, IDC_MOD, modbtn);
 }
 
 void Mainpage::clearlist(){
@@ -70,6 +72,9 @@ BEGIN_MESSAGE_MAP(Mainpage, CDialogEx)
 	ON_COMMAND(ID_32778, &Mainpage::inofficer)
 	ON_COMMAND(ID_32788, &Mainpage::outbook)
 	ON_COMMAND(ID_32787, &Mainpage::inbook)
+//	ON_NOTIFY(LVN_COLUMNCLICK, IDC_LIST1, &Mainpage::OnLvnColumnclickList1)
+ON_NOTIFY(NM_CLICK, IDC_LIST1, &Mainpage::OnNMClickList1)
+ON_COMMAND(ID_32800, &Mainpage::helpdoc)
 END_MESSAGE_MAP()
 
 
@@ -87,7 +92,7 @@ void Mainpage::OnBnClickedButton2()
 	if(this->showingstu){
 		clearlist();
 		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
-		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
+		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,140,1);
 		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
 		this->showlist.InsertColumn(3,"年龄",LVCFMT_LEFT,80,3);
 		this->showlist.InsertColumn(4,"借书情况",LVCFMT_LEFT,80,4);
@@ -114,7 +119,7 @@ void Mainpage::OnBnClickedButton2()
 	}else{
 		clearlist();
 		this->showlist.InsertColumn(0,"ID",LVCFMT_LEFT,80,0);    //设置列
-		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,80,1);
+		this->showlist.InsertColumn(1,"NAME",LVCFMT_LEFT,140,1);
 		this->showlist.InsertColumn(2,"性别",LVCFMT_LEFT,80,2);
 		this->showlist.InsertColumn(3,"年龄",LVCFMT_LEFT,80,3);
 		this->showlist.InsertColumn(4,"借书情况",LVCFMT_LEFT,80,4);
@@ -169,6 +174,7 @@ BOOL Mainpage::OnInitDialog()
 	//dwStyle |= LVS_EX_GRIDLINES;//网格线（只适用与report风格的listctrl）
 //	dwStyle |= LVS_EX_CHECKBOXES;//item前生成checkbox控件
 	showlist.SetExtendedStyle(dwStyle);
+
 	if(this->isadminlogin){
 		this->GetMenu()->EnableMenuItem(ID_32775,MF_BYCOMMAND|MF_ENABLED);
 		this->GetMenu()->EnableMenuItem(ID_32776,MF_BYCOMMAND|MF_ENABLED);
@@ -234,6 +240,7 @@ void Mainpage::On32772()
 		i++;
 	}
 	showingstu=true;
+	showingbook=false;
 }
 
 //add officer
@@ -259,7 +266,6 @@ void Mainpage::On32781()
 			modfrm.DoModal();
 }
 
-
 void Mainpage::OnBnClickedDel()
 {
 	// TODO: Add your control notification handler code here
@@ -272,7 +278,13 @@ void Mainpage::OnBnClickedDel()
 			int nItem = showlist.GetNextSelectedItem(pos);
 			char buf[20];
 			showlist.GetItemText(nItem,0,buf,19);
-			this->Stumgt.delet(buf);
+			if(this->showingstu){
+				this->Stumgt.delet(buf);
+			}else if(this->showingbook){
+				this->bkmgt.BookDelete(atoi(buf),1,this->bkmgt.AllNumber());
+			}else{
+				this->offmgt.delet(buf);
+			}
 			this->showlist.DeleteItem(nItem);
 			// you could do your own processing on nItem here
 		}
@@ -367,7 +379,6 @@ void Mainpage::On_newbook()
 
 }
 
-
 void Mainpage::On32786()
 {
 	// TODO: 在此添加命令处理程序代码
@@ -396,6 +407,8 @@ void Mainpage::On32786()
 		this->showlist.SetItemText(i,4,LPCTSTR(data.c_str()));   
 	}
 	delete [] books;
+	this->showingbook=true;
+	this->showingstu=false;
 }
 //转换函数
 string Mainpage::getstring (int n )
@@ -433,6 +446,7 @@ void Mainpage::offshow()
 		i++;
 	}
 	this->showingstu=false;
+	this->showingbook=false;
 }
 
 
@@ -441,6 +455,7 @@ void Mainpage::On32797()
 	// TODO: 在此添加命令处理程序代码
 	this->offmgt.mysort(true);
 	this->offshow();
+
 }
 
 
@@ -458,6 +473,7 @@ void Mainpage::outofficer()
 	CString FilePathName;
 	CFileDialog dlg(FALSE,"dat","officer");///TRUE为OPEN对话框，FALSE为SAVE AS对话框
 	if(dlg.DoModal()==IDOK)
+	//dlg.DoModal();
 	FilePathName=dlg.GetPathName();
 	string file(FilePathName);
 	this->offmgt.backup(file);
@@ -469,7 +485,8 @@ void Mainpage::instudent()
 	// TODO: 在此添加命令处理程序代码
 	CString FilePathName;
 	CFileDialog dlg(FALSE);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
-	if(dlg.DoModal()==IDOK)
+	//if(dlg.DoModal()==IDOK)
+	dlg.DoModal();
 	FilePathName=dlg.GetPathName();
 	string file(FilePathName);
 	this->Stumgt.rollback1(file);
@@ -481,7 +498,8 @@ void Mainpage::inofficer()
 	// TODO: 在此添加命令处理程序代码
 	CString FilePathName;
 	CFileDialog dlg(TRUE);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
-	if(dlg.DoModal()==IDOK)
+	//if(dlg.DoModal()==IDOK)
+	dlg.DoModal();
 	FilePathName=dlg.GetPathName();
 	string file(FilePathName);
 	this->offmgt.rollback1(file);
@@ -505,8 +523,40 @@ void Mainpage::inbook()
 	// TODO: 在此添加命令处理程序代码
 	CString FilePathName;
 	CFileDialog dlg(TRUE);///TRUE为OPEN对话框，FALSE为SAVE AS对话框
-	if(dlg.DoModal()==IDOK)
+	//if(dlg.DoModal()==IDOK)
+	dlg.DoModal();
 	FilePathName=dlg.GetPathName();
 	string file(FilePathName);
-	this->bkmgt.BackUp(this->bkmgt.AllNumber(),file);
+	this->bkmgt.BackUp(this->bkmgt.ALLNumberNEW(file),file);
+}
+
+
+//void Mainpage::OnLvnColumnclickList1(NMHDR *pNMHDR, LRESULT *pResult)
+//{
+//	LPNMLISTVIEW pNMLV = reinterpret_cast<LPNMLISTVIEW>(pNMHDR);
+//	// TODO: 在此添加控件通知处理程序代码
+//
+//
+//	*pResult = 0;
+//}
+
+
+void Mainpage::OnNMClickList1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+	// TODO: 在此添加控件通知处理程序代码
+	if(this->showingbook){
+		this->modbtn.EnableWindow(false);
+	}else{
+		this->modbtn.EnableWindow(true);
+	}
+	*pResult = 0;
+}
+
+
+void Mainpage::helpdoc()
+{
+	// TODO: 在此添加命令处理程序代码
+	help hpfrm;
+	hpfrm.DoModal();
 }

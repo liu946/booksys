@@ -37,4 +37,6 @@ public:
 	afx_msg void onexit();
 	string getstring (int n );
 	afx_msg void modself();
+	afx_msg void myborrowinfo();
+	afx_msg void helpdoc();
 };

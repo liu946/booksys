@@ -286,7 +286,7 @@ void CBookMangement::BackUp(int num,string fname)
 	fstream book2, book3;
 	book2.open("BookInformation.txt", ios::out);
 	book3.open(fname, ios::in);
-	for (int i = 0; i < num;i++)
+	for (int i=0;i<num;i++)
 	{
 		string a;
 		long b;
@@ -313,4 +313,20 @@ void CBookMangement::RollUp(int num,string fname)
 	}
 	book.close();
 	book1.close();
+}
+int CBookMangement::ALLNumberNEW(string fname)
+{
+	int num = 0;
+	fstream book;
+	book.open(fname, ios::in);
+	while (!book.eof())
+	{
+		string a;
+		long b;
+		int c, d, x, y, z;
+		book >> a >> b >> c >> d >> x >> y >> z;
+		num++;
+	}
+	book.close();
+	return (num-1);
 }
